@@ -64,8 +64,8 @@ background: rgb(242,238,158);
 background: linear-gradient(180deg, rgba(242,238,158,1) 0%, rgba(255,249,161,1) 53%, rgba(215,218,121,1) 100%);
 border: 2px solid black;
 box-shadow: 0.4vh 0.6vh rgba(0, 0, 0, 0.6);
-width: 220px;
-height: 220px;
+width: 300px;
+height: 300px;
 padding: 16px;
 display: flex;
 flex-direction: column;
@@ -76,4 +76,12 @@ min-width: none;
 .mini-content img{
 height: 30px;
 align-self: center;
+}
+
+a{
+    text-decoration: none;
+    color:white;
+    font-weight: bold;
+    font-size: 32px;
+    -webkit-text-stroke: 1px black;
 }
