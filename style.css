@@ -97,7 +97,7 @@ gap: 3px;
 .plus_minus_buttons button{
     gap:5px;
     margin:0px;
-    width: 125px;
+    width: 48%;
     padding : 5px;
 }
 

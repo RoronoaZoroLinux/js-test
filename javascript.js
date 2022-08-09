@@ -27,3 +27,9 @@ function minus_5(){
     }
     document.getElementById("jscript").innerText = btn_value;
 }
+
+function saved(){
+
+    document.getElementById("counter_saved").innerText += btn_value;
+    btn_value = 0 ;
+}
