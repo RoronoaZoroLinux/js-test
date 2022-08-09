@@ -72,6 +72,13 @@ flex-direction: column;
 flex-wrap: wrap;
 min-width: none;
 gap: 3px;
+
+overflow-y: scroll;
+
+}
+
+.mini-content::-webkit-scrollbar{
+    display: none;
 }
 
 .mini-content #jscript{
@@ -97,7 +104,7 @@ gap: 3px;
 .plus_minus_buttons button{
     gap:5px;
     margin:0px;
-    width: 125px;
+    width: 48%;
     padding : 5px;
 }
 

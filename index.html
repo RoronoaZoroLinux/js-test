@@ -36,6 +36,7 @@
                <div id="jscript"></div>
                <button id="increment-btn" onclick="increment()">increase</button>
                <button id="decrease-btn" onclick="decrease()">decrease</button>
+               
                <div class="plus_minus_buttons">
                  <button onclick="plus_5()">+5</button>
                 <button onclick="minus_5()">-5</button>
@@ -45,6 +46,11 @@
 
             <div class="mini-content">
                 <img src="img/needle.png" alt=""> <br> 
+               <button style="background-color: green;" onclick="save()">save</button>
+               <button style="background-color: blue;" onclick="clear_saved()">clear</button>
+
+                <p id="counter_saved" style="text-align: center; font-size: smaller;"></p>
+                
             </div>
             
         </div>
