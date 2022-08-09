@@ -72,6 +72,13 @@ flex-direction: column;
 flex-wrap: wrap;
 min-width: none;
 gap: 3px;
+
+overflow-y: scroll;
+
+}
+
+.mini-content::-webkit-scrollbar{
+    display: none;
 }
 
 .mini-content #jscript{

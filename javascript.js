@@ -1,5 +1,5 @@
-let btn_value = 0
-
+let btn_value = 0;
+let saved_value = 0;
 document.getElementById("jscript").innerText = btn_value;
 
 function increment(){
@@ -28,8 +28,18 @@ function minus_5(){
     document.getElementById("jscript").innerText = btn_value;
 }
 
-function saved(){
+function save(){
+    saved_value++;
+    document.getElementById("counter_saved").innerText += `${saved_value}. save is ${btn_value} \n` ;
+    btn_value = 0;
+    document.getElementById("jscript").innerText = btn_value;
+    
+}
 
-    document.getElementById("counter_saved").innerText += btn_value;
-    btn_value = 0 ;
+function clear_saved(){
+
+    document.getElementById("counter_saved").innerText = " ";
+    saved_value = 0;
+
+
 }
