@@ -1,0 +1,44 @@
+#jscript{
+    
+    background-color: darkred;
+    padding : 10px;
+    margin-bottom: 20px;
+    border-color: rgb(131, 142, 142);
+    border-radius: 5px;
+    box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.8);
+    color: rgb(255, 255, 255);
+text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
+}
+    
+
+
+
+    .mini-content::-webkit-scrollbar{
+        display: none;
+    }
+    
+    .mini-content #jscript{
+        text-align: center;
+    }
+    
+    .mini-content button
+    {
+    
+        background-color: darkred;
+        color: white;
+        border-radius: 3px;
+        margin-left: 20px;
+        margin-right: 20px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.4);
+        font-weight: bold;
+        font-size: 24px;
+    
+    }
+
+    .mini-content{
+
+        overflow-y: scroll;
+
+    }
