@@ -16,6 +16,7 @@
     <body>
 
 
+
         <div class="div-main">      
         <span class="big-header"><h1> JavaScript Test File</h1></span>
 
@@ -31,8 +32,15 @@
         <div class="content">
 
 
-            <div class="mini-content"> <script src="javascript.js"> </script>
-                <img src="img/needle.png" alt=""> <br> bu bir javascript deneme sayfasıdır :D
+            <div class="mini-content"> 
+               <div id="jscript"></div>
+               <button id="increment-btn" onclick="increment()">increase</button>
+               <button id="decrease-btn" onclick="decrease()">decrease</button>
+               <div class="plus_minus_buttons">
+                 <button onclick="plus_5()">+5</button>
+                <button onclick="minus_5()">-5</button>
+            </div>
+              
             </div>
 
             <div class="mini-content">
@@ -48,5 +56,9 @@
 
 
     </div>  
+
+
+
+    <script src="javascript.js"></script>
     </body>
 </html>
