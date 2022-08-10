@@ -51,3 +51,35 @@ padding: 0;
     gap : 10px;
     margin-top: 10px;
 }
+
+
+#card1,
+#card2,
+.backside{
+
+    background: rgb(255,255,255);
+    background: linear-gradient(90deg, rgb(164, 6, 6) 0%, rgba(253,29,29,1) 43%, rgb(121, 49, 49) 100%);
+    color:white;
+    font-size: 42px;
+    
+}
+
+
+#game_controller{
+    background: linear-gradient(90deg, rgb(255, 244, 217) 0%, rgb(228, 221, 221) 43%, rgb(219, 199, 199) 100%);
+    width: 500px;
+    height: 350px;
+    border-radius: 10px;
+    border:3px solid rgb(56, 62, 62);
+    box-shadow: 0.4vh 0.6vh rgba(0, 0, 0, 0.6);
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+.buttons{
+
+
+}

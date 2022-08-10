@@ -21,7 +21,7 @@
 
 
         <div class="div-main">      
-        <span class="big-header"><h1>Project2</h1></span>
+        <span class="big-header"><h1>BlackJack</h1></span>
 
         <div class="div-organizer">
 
@@ -33,47 +33,69 @@
 
 
         <div class="content">
-            <div>
+            <div style="display:flex; flex-direction:column;text-align:center; font-size: 36px; ">
             <img src="../img/blackjack.png" style="height: 250px;">
-            BlackJack
+            <span style="background-color: white; padding: 8px; border-radius: 8px;border:3px solid rgb(56, 62, 62);
+            box-shadow: 0.4vh 0.6vh rgba(0, 0, 0, 0.6);">Balance:100</span>
+           
             </div>
             
             <div class="blackjack-game">
                 
+               
                 <div class="table">
-                    <div class="card">
-                        <p id="symbol1canvas">$</p>
-                        <p id="canvas" style=" text-align:center;">asd</p>
-                        <p id="symbol2canvas" style="align-self:flex-end;">$</p>
+                    <div class="card" id="card1">
+                        <p id="symbol1canvas"></p>
+                        <p id="canvas" style=" text-align:center;"></p>
+                        <p id="symbol2canvas" style="align-self:flex-end;"></p>
 
                     </div>
 
-                    <div class="card">
+                    <div class="card" id="card2">
 
-                        <p id="symbol1canvas2">$</p>
-                        <p id="canvas2" style=" text-align:center;">asd</p>
-                        <p id="symbol2canvas2" style="align-self:flex-end;">$</p>
+                        <p id="symbol1canvas2"></p>
+                        <p id="canvas2" style=" text-align:center;"></p>
+                        <p id="symbol2canvas2" style="align-self:flex-end;"></p>
 
+                    </div>
+
+                    <div class="card backside" id="deck_count">
+
+                      104
+
+                    
                     </div>
                 </div>
                <div class="newCards" id="newCardsid">
     
                </div>
-              
+      
 
             </div>
 
-            <button onclick="render('canvas')">draw card</button>
-            <button onclick="render('canvas2')">draw card2</button>
-            <button onclick="newCard()">new card</button>
+            <div id="game_controller">
 
+                <div>textBox</div>
 
+                <div class="buttons">
+           
+            <button onclick="toggle()">toggle</button>
+            <button onclick="toggle2()">toggle2</button>
+            <button onclick="reset()">reset</button>
+            <button class="test">test</button>
+                </div>
+            
+            </div>
+          
          </div>
         
 
-         <button class="test">test</button>
+         
+         
 
     </div>  
+
+    
     <div id="log">log</div>
 
     <script src="project2_js.js"></script>
