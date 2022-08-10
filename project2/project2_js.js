@@ -3,15 +3,13 @@ var deck = Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,
 
 function drawCard(){
     let randomCard;
-    randomCard = Math.floor( Math.random() * deck.length );
+    randomCard = Math.floor( Math.random() * deck.length +1 );
     deck.splice(deck.indexOf(randomCard),1);
     if(randomCard > 52){
         randomCard = randomCard - 52;
     }
 
-    if(randomCard == 0){
-            randomCard += 7;
-    }
+
     return randomCard;
 
 }
@@ -24,7 +22,7 @@ function render(canvasName){
     let symbol1 = document.getElementById(symbolName1);
     let symbol2 = document.getElementById(symbolName2);
    
-    if(deck.length > 1){
+    if(deck.length > -1){
         
         if(newCard > 13 && newCard < 27) {
             symbol1.innerText = "♣";
@@ -110,4 +108,47 @@ function render(canvasName){
 
 function newCard(){
 
+
+}
+
+
+let newCardCount = 3;
+
+const btnadd = document.querySelector(".test");
+
+btnadd.addEventListener("click",addNew);
+
+function addNew(){
+    const newDiv = document.createElement("div");
+    newDiv.classList.add('card');
+
+
+    newDiv.style.display = 'flex';
+    newDiv.style.flexDirection = 'column';
+
+
+    
+        let newDivsymbol1 = document.createElement("p");
+        newDivsymbol1.id = 'symbol1canvas'+newCardCount;
+        newDivsymbol1.innerHTML = "x";
+        newDiv.appendChild(newDivsymbol1);
+
+        let newDivNum = document.createElement("p");
+        newDivNum.id = 'canvas'+newCardCount;
+        newDivNum.innerHTML = drawCard();
+        newDivNum.style.alignSelf = 'center';
+        newDiv.appendChild(newDivNum);
+        
+        let newDivsymbol2 = document.createElement("p");
+        newDivsymbol2.id = 'symbol2canvas'+newCardCount;
+        newDivsymbol2.innerHTML = "x";
+        newDivsymbol2.style.alignSelf = 'flex-end';
+        newDiv.appendChild(newDivsymbol2);
+
+   
+    document.getElementById("newCardsid").appendChild(newDiv);
+    let canvasname ='canvas'+ newCardCount;
+
+    render(canvasname);
+    newCardCount++;
 }
