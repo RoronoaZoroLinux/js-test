@@ -33,28 +33,48 @@
 
 
         <div class="content">
-<div style="display: flex; flex-direction: column; text-align: center; ">
+            <div>
             <img src="../img/blackjack.png" style="height: 250px;">
-            BlackJack</div>
-           <div class="blackjack-game">
+            BlackJack
+            </div>
             
-            <div class="card"><p id="symbol1">$</p><p id="canvas" style=" text-align:center;">asd</p><p id="symbol2" style="align-self:flex-end;">$</p></div>
-            <div id="log">log</div>
-           </div>
-            <button onclick="render()">draw card</button>
+            <div class="blackjack-game">
+                
+                <div class="table">
+                    <div class="card">
+                        <p id="symbol1canvas">$</p>
+                        <p id="canvas" style=" text-align:center;">asd</p>
+                        <p id="symbol2canvas" style="align-self:flex-end;">$</p>
 
-           
-       
+                    </div>
+
+                    <div class="card">
+
+                        <p id="symbol1canvas2">$</p>
+                        <p id="canvas2" style=" text-align:center;">asd</p>
+                        <p id="symbol2canvas2" style="align-self:flex-end;">$</p>
+
+                    </div>
+                </div>
+               <div class="newCards">
+                <div class="card"></div>
+                <div class="card"></div>
+
+               </div>
+              
+
+            </div>
+
+            <button onclick="render('canvas')">draw card</button>
+            <button onclick="render('canvas2')">draw card2</button>
+            <button onclick="newCard()">new card</button>
 
 
-    </div>
+         </div>
         
 
-
-
     </div>  
-
-
+    <div id="log">log</div>
 
     <script src="project2_js.js"></script>
     </body>
