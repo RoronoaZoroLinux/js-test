@@ -193,9 +193,16 @@ function funct_start(){
     document.getElementById('card1').id = 'front1';
     render('canvas');
     deal_audio.play();
-    text_box.innerHTML = `Your first card is "${text_box_card_name}".\nPlace a bet to continue.`;
+    text_box.innerHTML = `Your first card is ${text_box_card_name}\nPlace a bet to continue.`;
     document.getElementById("bet_buttons").style.display = "flex";
     document.getElementById("start_button").style.display = "none";
+
+    if(balance<1){
+        
+        alert("YOU HAVE NO MONEY LEFT!\nGet the fuck out here!");
+        window.location.href = "http://google.com";
+
+    }
 }
 
 
@@ -222,6 +229,12 @@ document.getElementById('canvas').innerText = " ";
 document.getElementById('canvas2').innerText = " ";
 
 document.getElementById('reset').style.display = 'none';
+
+document.getElementById('start_button').style.display = 'inline';
+text_box.innerHTML = 'Press "Start" to reveal your first card.'
+
+bet_amount = 0;
+card_sum = 0;
 
 }
 
@@ -257,4 +270,33 @@ function funct_second_card(){
     text_box.innerText = `You've placed $${bet_amount} \n Your hand is ${card_sum}`;
     document.getElementById('draw_card').style.display = 'inline';
 
+}
+
+function funct_stay(){
+   
+    document.getElementById('draw_card').style.display = 'none';
+    let kasa = Math.floor( Number(( Math.random() * 11 )) +Number(( Math.random() * 11 )) );
+    
+    if(kasa < 17){
+        while(kasa < 17){
+        kasa = Number(kasa) +  Number(Math.floor( Math.random() * 11  ));
+         }
+    }
+
+    if(kasa < card_sum || kasa > 22){
+        text_box.innerHTML = 'kasa ='+kasa+'YOU WIN!'
+
+        balance = Number(balance) + Number(bet_amount * 2);
+        document.getElementById('balance').innerHTML = balance;
+        document.getElementById('reset').style.display = 'inline';
+    }
+    else if(kasa > card_sum && kasa < 22){
+        text_box.innerHTML = 'kasa ='+kasa+'YOU Lost!'
+        document.getElementById('reset').style.display = 'inline';
+    }
+    else if(kasa == card_sum){
+        text_box.innerHTML = 'kasa ='+kasa+'Draw'
+    }
+
+    
 }
