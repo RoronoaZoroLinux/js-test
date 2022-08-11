@@ -43,9 +43,9 @@ function render(canvasName){
             }
             
             else{
-                if(newCard == 24 )  cardName ='&#128115;&#127999; Jack';
-                if(newCard == 25 )  cardName ='&#128120;&#127999; Queen';
-                if(newCard == 26 )  cardName ='&#129332;&#127999; King'; 
+                if(newCard == 24 )  cardName ='<div>&#128115;&#127999; <div>Jack</div>';
+                if(newCard == 25 )  cardName ='<div>&#128120;&#127999; <div>Queen</div>';
+                if(newCard == 26 )  cardName ='<div>&#129332;&#127999; <div>King</div>'; 
                 
             }
         
@@ -60,9 +60,9 @@ function render(canvasName){
                 cardName = (newCard - 26);
             }
             else{
-                if(newCard == 39 )  cardName ='&#128113; Jack';
-                if(newCard == 38 )  cardName ='&#128105; Queen';
-                if(newCard == 37 )  cardName ='&#129332; King'; 
+                if(newCard == 39 )  cardName ='<div>&#128113;</div> <div>Jack</div>';
+                if(newCard == 38 )  cardName ='<div>&#128105;</div> <div>Queen</div>';
+                if(newCard == 37 )  cardName ='<div>&#129332;</div> <div>King</div>'; 
                 
             }
         
@@ -77,9 +77,9 @@ function render(canvasName){
                 cardName = (newCard - 39);
             }
             else{
-                if(newCard == 50 )  cardName ="&#128113;&#127997; Jack";
-                if(newCard == 51 )  cardName ="&#128105;&#127997; Queen";
-                if(newCard == 52 )  cardName ="&#129332;&#127995; King"; 
+                if(newCard == 50 )  cardName ='<div>&#128113;&#127997;</div><div>Jack</div>';
+                if(newCard == 51 )  cardName ='<div>&#128105;&#127997;</div><div>Queen</div>';
+                if(newCard == 52 )  cardName ='<div>&#129332;&#127995;</div><div>King</div>'; 
                 
             }
             }
@@ -94,9 +94,9 @@ function render(canvasName){
                 cardName = newCard;
             }
             else{
-                if(newCard == 11 )  cardName ='&#128113;&#127995; Jack';
-                if(newCard == 12 )  cardName ="&#128105;&#127995; Queen";
-                if(newCard == 13 )  cardName ="&#129332;&#127995; King"; 
+                if(newCard == 11 )  cardName ='<div>&#128113;&#127995;</div><div>Jack</div>';
+                if(newCard == 12 )  cardName ="<div>&#128105;&#127995;</div><div>Queen</div>";
+                if(newCard == 13 )  cardName ="<div>&#129332;&#127995;</div><div>King</div>"; 
                 
             }
 
