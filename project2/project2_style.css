@@ -83,3 +83,29 @@ padding: 0;
 
 
 }
+
+#bet_buttons{
+    
+display: flex;
+flex-direction: row;
+
+    background-color: rgb(255, 119, 119);
+}
+
+#bet_buttons button{
+border-radius: 5px;
+background-color: brown;
+color: white;
+width: 100px;
+height: 50px;
+padding: 10px;
+
+}
+
+#entered_bet{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: aqua;
+    flex-grow: 1;
+}

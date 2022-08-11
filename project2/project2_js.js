@@ -1,6 +1,10 @@
 var deck = Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,52,51,50,49,48,47,46,45,44,43,42,41,40,39,38,37,36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1);
 let deal_audio = new Audio('../sounds/deal_card.mp3');
-
+let text_box = document.getElementById('text_box');
+let text_box_card_name = 'null';
+let card_sum = 0;
+let bet_amount = 0;
+let balance = 100;
 
 
 function drawCard(){
@@ -41,6 +45,7 @@ function render(canvasName){
                 if(newCard == 24 )  cardName ="jack";
                 if(newCard == 25 )  cardName ="queen";
                 if(newCard == 26 )  cardName ="king"; 
+                
             }
         
         }
@@ -57,6 +62,7 @@ function render(canvasName){
                 if(newCard == 39 )  cardName ="jack";
                 if(newCard == 38 )  cardName ="queen";
                 if(newCard == 37 )  cardName ="king"; 
+                
             }
         
         }
@@ -73,6 +79,7 @@ function render(canvasName){
                 if(newCard == 50 )  cardName ="jack";
                 if(newCard == 51 )  cardName ="queen";
                 if(newCard == 52 )  cardName ="king"; 
+                
             }
             }
 
@@ -89,11 +96,22 @@ function render(canvasName){
                 if(newCard == 11 )  cardName ="jack";
                 if(newCard == 12 )  cardName ="queen";
                 if(newCard == 13 )  cardName ="king"; 
+                
             }
 
         }
-  
+        
     document.getElementById(canvasName).innerText = cardName;
+    text_box_card_name = cardName;
+    if(typeof(cardName)=="string"){
+        
+        card_sum = Number(card_sum) + Number(10);
+    }
+    else if(typeof(cardName)=="number"){
+        card_sum = Number(card_sum) + Number(cardName);
+    }
+   
+
    // document.getElementById("log").innerText = "rnd: " + newCard + " deck ln : " + deck.length +"\n" + deck;
    
             }
@@ -161,12 +179,13 @@ function addNew(){
 
 
 
-function toggle(){
+function funct_start(){
 
     document.getElementById('card1').id = 'front1';
     render('canvas');
     deal_audio.play();
-
+    text_box.innerText = `Your first card is "${text_box_card_name}". Place a bet to continue.`;
+   
 }
 
 
@@ -204,4 +223,13 @@ document.getElementById('canvas2').innerText = " ";
 
 }
 
+function render_bet(amount){
 
+    if([Number(bet_amount) + Number(amount)] <= balance && [Number(bet_amount) + Number(amount)] >= 0){
+
+    bet_amount = Number(bet_amount) + Number(amount);
+    document.getElementById("entered_bet").innerHTML = bet_amount;
+
+    }
+
+}

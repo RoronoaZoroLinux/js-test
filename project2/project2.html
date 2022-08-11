@@ -61,7 +61,7 @@
 
                     <div class="card backside" id="deck_count">
 
-                      104
+                      102
 
                     
                     </div>
@@ -75,15 +75,29 @@
 
             <div id="game_controller">
 
-                <div>textBox</div>
+                <div id="text_box">Press "Start" to begin playing.</div>
 
-                <div class="buttons">
-           
-            <button onclick="toggle()">toggle</button>
-            <button onclick="toggle2()">toggle2</button>
-            <button onclick="reset()">reset</button>
-            <button class="test">test</button>
+                <div id="bet_buttons">    
+                    <div>
+    
+                        <div><button onclick="render_bet(-1)">-1</button> <button onclick="render_bet(1)">+1</button></div>
+                        <div><button onclick="render_bet(-5)">-5</button> <button onclick="render_bet(5)">+5</button></div>
+                        <div><button onclick="render_bet(-10)">-10</button> <button onclick="render_bet(10)">+10</button></div>
+                        <div><button onclick="render_bet(-100)">-100</button> <button onclick="render_bet(100)">+100</button></div>
+                     </div>
+
+                     <div id="entered_bet">asd</div>
+                    
                 </div>
+                
+
+            <div class="buttons">
+                
+                <button onclick="funct_start()">Start</button>
+                <button onclick="toggle2()">toggle2</button>
+                <button onclick="reset()">reset</button>
+                <button class="test">test</button>
+            </div>
             
             </div>
           
@@ -95,8 +109,11 @@
 
     </div>  
 
+
+
+  
     
-    <div id="log">log</div>
+    
 
     <script src="project2_js.js"></script>
     </body>
