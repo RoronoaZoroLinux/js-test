@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+        <title>JavaScript test</title>
+        <link rel="stylesheet" href="../style.css">
+        <link rel="stylesheet" href="project2_style.css">
+        
+
+        <meta name="viewport" content="width=1024px">
+       
+    </head>
+
+
+
+
+    <body>
+
+
+
+        <div class="div-main">      
+        <span class="big-header"><h1>BlackJack</h1></span>
+
+        <div class="div-organizer">
+
+
+        <div class="cute">
+            <img src="../img/cute.png" alt="cute dino">
+            <a href="../index.html"><br>[ NoteHub ]</a>
+        </div>
+
+
+        <div class="content">
+            <div style="display:flex; flex-direction:column;text-align:center; font-size: 36px; ">
+            <img src="../img/blackjack.png" style="height: 250px;">
+            <span id="balance">Balance:100</span>
+           
+            </div>
+            
+            <div class="blackjack-game">
+                
+               
+                <div class="table">
+                    <div class="card" id="card1">
+                        <p id="symbol1canvas"></p>
+                        <p id="canvas" style=" text-align:center;"></p>
+                        <p id="symbol2canvas" style="align-self:flex-end;"></p>
+
+                    </div>
+
+                    <div class="card" id="card2">
+
+                        <p id="symbol1canvas2"></p>
+                        <p id="canvas2" style=" text-align:center;"></p>
+                        <p id="symbol2canvas2" style="align-self:flex-end;"></p>
+
+                    </div>
+
+                    <div class="card backside" id="deck_count">
+
+                      102
+
+                    
+                    </div>
+                </div>
+               <div class="newCards" id="newCardsid">
+    
+               </div>
+      
+
+            </div>
+
+            <div id="game_controller">
+
+                <div id="text_box">Press "Start" to begin playing.</div>
+               <div><button id="second_card" onclick="funct_second_card()">Reveal second card</button></div>
+                <div> <button id="start_button" onclick="funct_start()">Start</button></div>
+                <div><button id="draw_card" onclick="funct_draw_card()">Draw Card</button></div>
+                <div><button id="reset" onclick="reset()">Play Again</button></div>
+
+                <div id="bet_buttons">    
+                    <div>
+    
+                        <div><button onclick="render_bet(-1)">-1</button> <button onclick="render_bet(1)">+1</button></div>
+                        <div><button onclick="render_bet(-5)">-5</button> <button onclick="render_bet(5)">+5</button></div>
+                        <div><button onclick="render_bet(-10)">-10</button> <button onclick="render_bet(10)">+10</button></div>
+                        <div><button onclick="render_bet(-100)">-100</button> <button onclick="render_bet(100)">+100</button></div>
+                     </div>
+
+                     <div id="entered_bet">0</div>
+                     <div id="enter_bet_button" onclick="funct_enter_bet()" style="align-self: center;"><button >enter</button></div>
+                    
+                </div>
+                
+
+            <div class="buttons">
+                
+               
+                
+                
+                
+            </div>
+            
+            </div>
+          
+         </div>
+        
+
+         
+         
+
+    </div>  
+
+
+
+  
+    
+    
+
+    <script src="project2_js.js"></script>
+    </body>
+</html>
