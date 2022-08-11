@@ -35,8 +35,7 @@
         <div class="content">
             <div style="display:flex; flex-direction:column;text-align:center; font-size: 36px; ">
             <img src="../img/blackjack.png" style="height: 250px;">
-            <span style="background-color: white; padding: 8px; border-radius: 8px;border:3px solid rgb(56, 62, 62);
-            box-shadow: 0.4vh 0.6vh rgba(0, 0, 0, 0.6);">Balance:100</span>
+            <span id="balance">Balance:100</span>
            
             </div>
             
@@ -76,6 +75,10 @@
             <div id="game_controller">
 
                 <div id="text_box">Press "Start" to begin playing.</div>
+               <div><button id="second_card" onclick="funct_second_card()">Reveal second card</button></div>
+                <div> <button id="start_button" onclick="funct_start()">Start</button></div>
+                <div><button id="draw_card" onclick="funct_draw_card()">Draw Card</button></div>
+                <div><button id="reset" onclick="reset()">Play Again</button></div>
 
                 <div id="bet_buttons">    
                     <div>
@@ -86,17 +89,18 @@
                         <div><button onclick="render_bet(-100)">-100</button> <button onclick="render_bet(100)">+100</button></div>
                      </div>
 
-                     <div id="entered_bet">asd</div>
+                     <div id="entered_bet">0</div>
+                     <div id="enter_bet_button" onclick="funct_enter_bet()" style="align-self: center;"><button >enter</button></div>
                     
                 </div>
                 
 
             <div class="buttons">
                 
-                <button onclick="funct_start()">Start</button>
-                <button onclick="toggle2()">toggle2</button>
-                <button onclick="reset()">reset</button>
-                <button class="test">test</button>
+               
+                
+                
+                
             </div>
             
             </div>

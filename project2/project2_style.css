@@ -76,6 +76,7 @@ padding: 0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    text-align: center;
 
 }
 
@@ -86,10 +87,10 @@ padding: 0;
 
 #bet_buttons{
     
-display: flex;
+display: none;
 flex-direction: row;
 
-    background-color: rgb(255, 119, 119);
+
 }
 
 #bet_buttons button{
@@ -99,6 +100,9 @@ color: white;
 width: 100px;
 height: 50px;
 padding: 10px;
+margin: 2px;
+font-size: 24px;
+font-weight: bold;
 
 }
 
@@ -106,6 +110,49 @@ padding: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: aqua;
+    
     flex-grow: 1;
+}
+
+#start_button{
+
+font-size: 64px;
+height: 100px;
+width: 200px;
+padding: 10px;
+border-radius: 25px;
+box-shadow: 0.4vh 0.6vh rgba(0, 0, 0, 0.6);
+background-color: darkslategray;
+color: rgb(255, 255, 255);
+font-weight: bolder;
+}
+
+#balance{
+
+    background-color: white; 
+    padding: 8px; 
+    border-radius: 8px;
+    border:3px solid rgb(56, 62, 62);
+    box-shadow: 0.4vh 0.6vh rgba(0, 0, 0, 0.6);
+}
+
+#second_card{
+    display: none;
+
+    font-size: 24px;
+    height: 60px;
+    width: 250px;
+    border-radius: 25px;
+    box-shadow: 0.4vh 0.6vh rgba(0, 0, 0, 0.6);
+    background-color: darkslategray;
+    color: rgb(255, 255, 255);
+    font-weight: bolder;
+}
+
+#draw_card{
+    display: none;
+}
+
+#reset{
+    display: none;
 }

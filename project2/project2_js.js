@@ -7,6 +7,7 @@ let bet_amount = 0;
 let balance = 100;
 
 
+
 function drawCard(){
     let randomCard;
     randomCard = Math.floor( Math.random() * deck.length +1 );
@@ -42,9 +43,9 @@ function render(canvasName){
             }
             
             else{
-                if(newCard == 24 )  cardName ="jack";
-                if(newCard == 25 )  cardName ="queen";
-                if(newCard == 26 )  cardName ="king"; 
+                if(newCard == 24 )  cardName ='&#128115;&#127999; Jack';
+                if(newCard == 25 )  cardName ='&#128120;&#127999; Queen';
+                if(newCard == 26 )  cardName ='&#129332;&#127999; King'; 
                 
             }
         
@@ -59,9 +60,9 @@ function render(canvasName){
                 cardName = (newCard - 26);
             }
             else{
-                if(newCard == 39 )  cardName ="jack";
-                if(newCard == 38 )  cardName ="queen";
-                if(newCard == 37 )  cardName ="king"; 
+                if(newCard == 39 )  cardName ='&#128113; Jack';
+                if(newCard == 38 )  cardName ='&#128105; Queen';
+                if(newCard == 37 )  cardName ='&#129332; King'; 
                 
             }
         
@@ -76,9 +77,9 @@ function render(canvasName){
                 cardName = (newCard - 39);
             }
             else{
-                if(newCard == 50 )  cardName ="jack";
-                if(newCard == 51 )  cardName ="queen";
-                if(newCard == 52 )  cardName ="king"; 
+                if(newCard == 50 )  cardName ="&#128113;&#127997; Jack";
+                if(newCard == 51 )  cardName ="&#128105;&#127997; Queen";
+                if(newCard == 52 )  cardName ="&#129332;&#127995; King"; 
                 
             }
             }
@@ -93,15 +94,15 @@ function render(canvasName){
                 cardName = newCard;
             }
             else{
-                if(newCard == 11 )  cardName ="jack";
-                if(newCard == 12 )  cardName ="queen";
-                if(newCard == 13 )  cardName ="king"; 
+                if(newCard == 11 )  cardName ='&#128113;&#127995; Jack';
+                if(newCard == 12 )  cardName ="&#128105;&#127995; Queen";
+                if(newCard == 13 )  cardName ="&#129332;&#127995; King"; 
                 
             }
 
         }
         
-    document.getElementById(canvasName).innerText = cardName;
+    document.getElementById(canvasName).innerHTML = cardName;
     text_box_card_name = cardName;
     if(typeof(cardName)=="string"){
         
@@ -134,11 +135,8 @@ function newCard(){
 
 let newCardCount = 3;
 
-const btnadd = document.querySelector(".test");
 
-btnadd.addEventListener("click",addNew);
-
-function addNew(){
+function funct_draw_card(){
     const newDiv = document.createElement("div");
     newDiv.classList.add('card');
 
@@ -157,6 +155,7 @@ function addNew(){
         newDivNum.id = 'canvas'+newCardCount;
         newDivNum.innerHTML = " ";
         newDivNum.style.alignSelf = 'center';
+        newDivNum.style.textAlign = 'center';
         newDiv.appendChild(newDivNum);
         
         let newDivsymbol2 = document.createElement("p");
@@ -173,7 +172,17 @@ function addNew(){
     newCardCount++;
     document.getElementById("deck_count").innerHTML = deck.length;
     deal_audio.play();
-    console.log(deck_count + " " + deck.length);
+    
+    if(card_sum <= 21){
+        text_box.innerText = `You've placed $${bet_amount} \n Your hand is ${card_sum}`;
+    }
+    else if(card_sum > 21){
+        text_box.innerText = `Your hand is ${card_sum} and you busted! \n you've lost $${bet_amount}`;
+        document.getElementById('draw_card').style.display = 'none';
+        document.getElementById('reset').style.display = 'inline';
+    }
+    
+   
 }
 
 
@@ -184,19 +193,10 @@ function funct_start(){
     document.getElementById('card1').id = 'front1';
     render('canvas');
     deal_audio.play();
-    text_box.innerText = `Your first card is "${text_box_card_name}". Place a bet to continue.`;
-   
+    text_box.innerHTML = `Your first card is "${text_box_card_name}".\nPlace a bet to continue.`;
+    document.getElementById("bet_buttons").style.display = "flex";
+    document.getElementById("start_button").style.display = "none";
 }
-
-
-function toggle2(){
-
-    document.getElementById('card2').id = 'front2';
-    render('canvas2');
-    deal_audio.play();
-
-}
-
 
 
 
@@ -221,6 +221,8 @@ document.getElementById('symbol2canvas2').innerHTML = ' ';
 document.getElementById('canvas').innerText = " ";
 document.getElementById('canvas2').innerText = " ";
 
+document.getElementById('reset').style.display = 'none';
+
 }
 
 function render_bet(amount){
@@ -231,5 +233,28 @@ function render_bet(amount){
     document.getElementById("entered_bet").innerHTML = bet_amount;
 
     }
+
+}
+
+function funct_enter_bet(){
+    
+    if(bet_amount > 0){
+        document.getElementById("bet_buttons").style.display = "none";
+        balance -= bet_amount;
+        document.getElementById("balance").innerHTML = "Balance:" + balance;
+        text_box.innerText = `You've placed $${bet_amount}`;
+        document.getElementById("second_card").style.display ='inline';
+    } 
+}
+
+
+function funct_second_card(){
+
+    document.getElementById('card2').id = 'front2';
+    render('canvas2');
+    deal_audio.play();
+    document.getElementById('second_card').style.display ='none';
+    text_box.innerText = `You've placed $${bet_amount} \n Your hand is ${card_sum}`;
+    document.getElementById('draw_card').style.display = 'inline';
 
 }
