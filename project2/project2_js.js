@@ -296,18 +296,19 @@ function funct_draw_card(dealer){
 
 function funct_start(){
     
+    
     document.getElementById("start_button").style.display = "none";
     document.getElementById('card1').id = 'front1';
     render('canvas',false);
     deal_audio.play();
     text_box.innerHTML = `Your first card is ${text_box_card_name}`;
-   
+    
    
     setTimeout(function(){
      
         deal_audio.play();
 
-        document.getElementById('dealer_card_1').id = 'front1';
+        document.getElementById('dealer_card_1').id = 'dealer_front1';
        
         render('canvasdealer1',true);
         
@@ -373,12 +374,36 @@ document.getElementById('symbol2canvas2').innerHTML = ' ';
 
 document.getElementById('canvas').innerText = " ";
 document.getElementById('canvas2').innerText = " ";
+/////////////////////////////////////////////////////
+
+document.getElementById('dealer_front1').id = 'dealer_card_1';
+document.getElementById('dealer_front2').id = 'dealer_card_2';
+
+document.getElementById('symbol1canvasdealer1').innerHTML = ' ';
+document.getElementById('symbol2canvasdealer1').innerHTML = ' ';
+
+document.getElementById('canvasdealer1').innerText = " ";
+
+///////
+
+document.getElementById('symbol1canvasdealer2').innerHTML = ' ';
+document.getElementById('symbol2canvasdealer2').innerHTML = ' ';
+
+document.getElementById('canvasdealer2').innerText = " ";
+
+
+/////////////////////////////////////////////////////
+
 
 document.getElementById('reset').style.display = 'none';
-
 document.getElementById('start_button').style.display = 'inline';
 text_box.innerHTML = 'Press "Start" to reveal your first card.';
 document.getElementById('entered_bet').innerHTML = '0';
+
+/////////////////////////////////////////////////
+
+
+
 
 bet_amount = 0;
 card_sum = 0;
@@ -458,6 +483,6 @@ function funct_stay(){
 
 function dealers2(){
 deal_audio.play();
-document.getElementById('dealer_card_2').id = 'front1';
+document.getElementById('dealer_card_2').id = 'dealer_front2';
 render('canvasdealer2',true);
 }
