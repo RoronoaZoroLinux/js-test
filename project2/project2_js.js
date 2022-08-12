@@ -14,6 +14,8 @@ let ace2 = false;
 let balance = 100;
 let text_box_card_name = 'null';
 
+let dealer_card_sum = 0;
+
 let dealer_ace_count = 0;
 let dealer_ace = false;
 let dealer_ace2 = false;
@@ -135,14 +137,6 @@ function render(canvasName , dealer){
 
     document.getElementById(canvasName).innerHTML = cardName;
     
-    if(dealer == false){
-        text_box_card_name = cardName;
-    }
-
-    else if(dealer == true){
-        dealer_text_box_card_name = cardName;
-    }
-    
     
     if(typeof(cardName)=="string"){
         
@@ -189,7 +183,7 @@ function render(canvasName , dealer){
         if(dealer == false){
             card_sum = Number(card_sum) + Number(cardName);
         }
-        else if(dealer == ture){
+        else if(dealer == true){
             dealer_card_sum = Number(dealer_card_sum) + Number(cardName);
         }
        
@@ -215,6 +209,17 @@ function render(canvasName , dealer){
 
                 }
             }
+
+
+            if(dealer == false){
+                text_box_card_name = card_sum;
+            }
+        
+            else if(dealer == true){
+                dealer_text_box_card_name = dealer_card_sum;
+            }
+            
+
 
     }//end of deck > 1
 
@@ -315,11 +320,11 @@ function funct_start(){
 
        
 
-        text_box.innerHTML = `Your first card is ${text_box_card_name} \n Dealer's first card is ${dealer_text_box_card_name}`;
+        text_box.innerHTML = `Your first card is ${text_box_card_name}<div>Dealer's hand is ${dealer_text_box_card_name}</div>`;
     
         
     
-    }, 1500); 
+    }, 800); 
 
    
     setTimeout(function(){
@@ -327,11 +332,11 @@ function funct_start(){
        
 
         
-    
+        text_box.innerHTML = `Your first card is ${text_box_card_name}<div>Dealer's hand is ${dealer_text_box_card_name}</div><div>Place a bet to continue</div>`;
         document.getElementById("bet_buttons").style.display = "flex";
         
     
-    }, 2500); 
+    }, 2000); 
 
    
   
@@ -421,27 +426,29 @@ function funct_second_card(){
 function funct_stay(){
    
     document.getElementById('draw_card').style.display = 'none';
-    let kasa = Math.floor( Number(( Math.random() * 11 )) +Number(( Math.random() * 11 )) );
+    let dealer_card_sum = Math.floor( Number(( Math.random() * 11 )) +Number(( Math.random() * 11 )) );
     
-    if(kasa < 17){
-        while(kasa < 17){
-        kasa = Number(kasa) +  Number(Math.floor( Math.random() * 11  ));
+    dealers2();
+
+    if(dealer_card_sum < 17){
+        while(dealer_card_sum < 17){
+        dealer_card_sum = Number(dealer_card_sum) +  Number(Math.floor( Math.random() * 11  ));
          }
     }
 
-    if(kasa < card_sum || kasa > 22){
-        text_box.innerHTML = 'kasa ='+kasa+'YOU WIN!'
+    if(dealer_card_sum < card_sum || dealer_card_sum > 22){
+        text_box.innerHTML = 'dealer_card_sum ='+dealer_card_sum+'YOU WIN!'
 
         balance = Number(balance) + Number(bet_amount * 2);
         document.getElementById('balance').innerHTML = 'Balance $'+balance;
         document.getElementById('reset').style.display = 'inline';
     }
-    else if(kasa > card_sum && kasa < 22){
-        text_box.innerHTML = 'kasa ='+kasa+'YOU Lost!'
+    else if(dealer_card_sum > card_sum && dealer_card_sum < 22){
+        text_box.innerHTML = 'dealer_card_sum ='+dealer_card_sum+'YOU Lost!'
         document.getElementById('reset').style.display = 'inline';
     }
-    else if(kasa == card_sum){
-        text_box.innerHTML = 'kasa ='+kasa+' Draw'
+    else if(dealer_card_sum == card_sum){
+        text_box.innerHTML = 'dealer_card_sum ='+dealer_card_sum+' Draw'
         balance = Number(balance) + Number(bet_amount);
         document.getElementById('reset').style.display = 'inline';
     }
@@ -449,3 +456,8 @@ function funct_stay(){
     
 }
 
+function dealers2(){
+deal_audio.play();
+document.getElementById('dealer_card_2').id = 'front1';
+render('canvasdealer2',true);
+}
