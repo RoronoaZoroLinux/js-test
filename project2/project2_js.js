@@ -5,7 +5,11 @@ let text_box_card_name = 'null';
 let card_sum = 0;
 let bet_amount = 0;
 let balance = 100;
-
+let ace_count = 0;
+let test_case_a = false;
+let test_case_b = false;
+let ace = false;
+let ace2 = false;
 
 
 function drawCard(){
@@ -20,6 +24,7 @@ function drawCard(){
     return randomCard;
 
 }
+
 
 function render(canvasName){
     let newCard =  drawCard();
@@ -101,21 +106,54 @@ function render(canvasName){
             }
 
         }
-        
+    
+   
+    if(test_case_a == true){
+
+    cardName = 1;
+
+    }
+
+    else if(test_case_b == true){
+
+        cardName = 10;
+
+    }
+
     document.getElementById(canvasName).innerHTML = cardName;
     text_box_card_name = cardName;
+    
     if(typeof(cardName)=="string"){
         
         card_sum = Number(card_sum) + Number(10);
     }
     else if(typeof(cardName)=="number"){
-        card_sum = Number(card_sum) + Number(cardName);
-    }
-   
 
-   // document.getElementById("log").innerText = "rnd: " + newCard + " deck ln : " + deck.length +"\n" + deck;
-   
+        if (cardName == 1){ 
+
+            ace_count++;
+           
+            if(ace == false){
+                card_sum = card_sum + Number(10);
+                ace = true;
             }
+            
+        }
+        
+
+        card_sum = Number(card_sum) + Number(cardName);
+       
+    }
+
+
+    if(card_sum > 21 && ace_count && ace2 == false ){
+
+        card_sum = card_sum - 10;
+        ace2 = true;
+
+    }
+
+    }//end of deck > 1
 
     else{
         document.getElementById(canvasName).style.color = "black";
@@ -181,7 +219,6 @@ function funct_draw_card(){
         document.getElementById('draw_card').style.display = 'none';
         document.getElementById('reset').style.display = 'inline';
     }
-    
    
 }
 
@@ -200,7 +237,7 @@ function funct_start(){
     if(balance<1){
         
         alert("YOU HAVE NO MONEY LEFT!\nGet the fuck out here!");
-        window.location.href = "http://google.com";
+        window.location.href = "https://google.com";
 
     }
 }
@@ -231,10 +268,15 @@ document.getElementById('canvas2').innerText = " ";
 document.getElementById('reset').style.display = 'none';
 
 document.getElementById('start_button').style.display = 'inline';
-text_box.innerHTML = 'Press "Start" to reveal your first card.'
+text_box.innerHTML = 'Press "Start" to reveal your first card.';
+document.getElementById('entered_bet').innerHTML = '0';
 
 bet_amount = 0;
 card_sum = 0;
+ace_count = 0;
+ace = false;
+ace2 = false;
+
 
 }
 
@@ -254,7 +296,7 @@ function funct_enter_bet(){
     if(bet_amount > 0){
         document.getElementById("bet_buttons").style.display = "none";
         balance -= bet_amount;
-        document.getElementById("balance").innerHTML = "Balance:" + balance;
+        document.getElementById("balance").innerHTML = "Balance $" + balance;
         text_box.innerText = `You've placed $${bet_amount}`;
         document.getElementById("second_card").style.display ='inline';
     } 
@@ -287,7 +329,7 @@ function funct_stay(){
         text_box.innerHTML = 'kasa ='+kasa+'YOU WIN!'
 
         balance = Number(balance) + Number(bet_amount * 2);
-        document.getElementById('balance').innerHTML = balance;
+        document.getElementById('balance').innerHTML = 'Balance $'+balance;
         document.getElementById('reset').style.display = 'inline';
     }
     else if(kasa > card_sum && kasa < 22){
@@ -295,8 +337,12 @@ function funct_stay(){
         document.getElementById('reset').style.display = 'inline';
     }
     else if(kasa == card_sum){
-        text_box.innerHTML = 'kasa ='+kasa+'Draw'
+        text_box.innerHTML = 'kasa ='+kasa+' Draw'
+        balance = Number(balance) + Number(bet_amount);
+        document.getElementById('reset').style.display = 'inline';
     }
 
     
 }
+
+

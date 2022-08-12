@@ -9,7 +9,8 @@
 }
 
 
-.blackjack-game{
+.blackjack-game,
+#dealer{
 
 margin: 20px;
 background: linear-gradient(180deg, rgb(158, 242, 173) 0%, rgb(6, 164, 51) 53%, rgb(7, 98, 24) 100%);
@@ -22,6 +23,15 @@ display: flex;
 flex-direction: column;
 gap: 3px;
 
+}
+
+#dealer{
+    height: 350px;
+    
+}
+#dealer div{
+    gap : 5px;
+    margin-top: 5px;
 }
 
 .card{
@@ -82,11 +92,7 @@ padding: 0;
     flex-direction: column;
     justify-content: space-between;
     text-align: center;
-
-}
-
-.buttons{
-
+    padding-bottom: 24px;
 
 }
 
@@ -139,6 +145,8 @@ font-weight: bolder;
     border-radius: 8px;
     border:3px solid rgb(56, 62, 62);
     box-shadow: 0.4vh 0.6vh rgba(0, 0, 0, 0.6);
+    margin-top: 24px;
+    text-align: center;
 }
 
 #second_card{
@@ -160,4 +168,14 @@ font-weight: bolder;
 
 #reset{
     display: none;
+}
+
+#dealer{
+    display: flex; 
+    flex-direction: column;
+}
+
+#dealer div{
+    display: flex;
+    flex-wrap: wrap;
 }
