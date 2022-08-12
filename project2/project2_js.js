@@ -134,7 +134,15 @@ function render(canvasName , dealer){
     }
 
     document.getElementById(canvasName).innerHTML = cardName;
-    text_box_card_name = cardName;
+    
+    if(dealer == false){
+        text_box_card_name = cardName;
+    }
+
+    else if(dealer == true){
+        dealer_text_box_card_name = cardName;
+    }
+    
     
     if(typeof(cardName)=="string"){
         
@@ -282,13 +290,53 @@ function funct_draw_card(dealer){
 
 
 function funct_start(){
-
+    
+    document.getElementById("start_button").style.display = "none";
     document.getElementById('card1').id = 'front1';
     render('canvas',false);
     deal_audio.play();
-    text_box.innerHTML = `Your first card is ${text_box_card_name}\nPlace a bet to continue.`;
-    document.getElementById("bet_buttons").style.display = "flex";
-    document.getElementById("start_button").style.display = "none";
+    text_box.innerHTML = `Your first card is ${text_box_card_name}`;
+   
+   
+    setTimeout(function(){
+     
+        deal_audio.play();
+
+        document.getElementById('dealer_card_1').id = 'front1';
+       
+        render('canvasdealer1',true);
+        
+        
+    
+    }, 800); 
+
+
+    setTimeout(function(){
+
+       
+
+        text_box.innerHTML = `Your first card is ${text_box_card_name} \n Dealer's first card is ${dealer_text_box_card_name}`;
+    
+        
+    
+    }, 1500); 
+
+   
+    setTimeout(function(){
+
+       
+
+        
+    
+        document.getElementById("bet_buttons").style.display = "flex";
+        
+    
+    }, 2500); 
+
+   
+  
+
+    
 
     if(balance<1){
         
@@ -401,4 +449,3 @@ function funct_stay(){
     
 }
 
-render('canvasdealer1',true);
