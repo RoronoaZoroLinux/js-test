@@ -4,7 +4,7 @@ let text_box = document.getElementById('text_box');
 let card_sum = 0;
 let bet_amount = 0;
 
-let test_case_a = true;
+let test_case_a = false;
 let test_case_b = false;
 
 let ace_count = 0;
@@ -63,9 +63,9 @@ function render(canvasName , dealer){
             }
             
             else{
-                if(newCard == 24 )  cardName ='<div>&#128115;&#127999; <div>Jack</div>';
-                if(newCard == 25 )  cardName ='<div>&#128120;&#127999; <div>Queen</div>';
-                if(newCard == 26 )  cardName ='<div>&#129332;&#127999; <div>King</div>'; 
+                if(newCard == 24 )  cardName ='<div>&#128115;&#127999;</div> <div>Jack</div>';
+                if(newCard == 25 )  cardName ='<div>&#128120;&#127999;</div> <div>Queen</div>';
+                if(newCard == 26 )  cardName ='<div>&#129332;&#127999;</div> <div>King</div>'; 
                 
             }
         
@@ -97,9 +97,9 @@ function render(canvasName , dealer){
                 cardName = (newCard - 39);
             }
             else{
-                if(newCard == 50 )  cardName ='<div>&#128113;&#127997;</div><div>Jack</div>';
-                if(newCard == 51 )  cardName ='<div>&#128105;&#127997;</div><div>Queen</div>';
-                if(newCard == 52 )  cardName ='<div>&#129332;&#127995;</div><div>King</div>'; 
+                if(newCard == 50 )  cardName ='<div>&#128113;&#127997;</div> <div>Jack</div>';
+                if(newCard == 51 )  cardName ='<div>&#128105;&#127997;</div> <div>Queen</div>';
+                if(newCard == 52 )  cardName ='<div>&#129332;&#127995;</div> <div>King</div>'; 
                 
             }
             }
@@ -114,9 +114,9 @@ function render(canvasName , dealer){
                 cardName = newCard;
             }
             else{
-                if(newCard == 11 )  cardName ='<div>&#128113;&#127995;</div><div>Jack</div>';
-                if(newCard == 12 )  cardName ="<div>&#128105;&#127995;</div><div>Queen</div>";
-                if(newCard == 13 )  cardName ="<div>&#129332;&#127995;</div><div>King</div>"; 
+                if(newCard == 11 )  cardName ='<div>&#128113;&#127995;</div> <div>Jack</div>';
+                if(newCard == 12 )  cardName ="<div>&#128105;&#127995;</div> <div>Queen</div>";
+                if(newCard == 13 )  cardName ="<div>&#129332;&#127995;</div> <div>King</div>"; 
                 
             }
 
@@ -438,7 +438,9 @@ ace_count = 0;
 ace = false;
 ace2 = false;
 dealer_card_sum = 0;
-
+dealer_ace_count = 0;
+dealer_ace = false;
+dealer_ace2 = false;
 
 }
 
@@ -521,21 +523,22 @@ const dealer_draw_card = async () => {
 }
 
 
+  
 function end_round(){
 
     if(dealer_card_sum < card_sum || dealer_card_sum > 22){
-        text_box.innerHTML = 'dealer_card_sum ='+dealer_card_sum+'YOU WIN!'
+        text_box.innerHTML = `Your hand is ${card_sum}</div> <div>Dealers hand is ${dealer_card_sum}</div><div style='background-color : yellow;'>YOU WIN!</div>`;
 
         balance = Number(balance) + Number(bet_amount * 2);
         document.getElementById('balance').innerHTML = 'Balance $'+balance;
         document.getElementById('reset').style.display = 'inline';
     }
     else if(dealer_card_sum > card_sum && dealer_card_sum < 22){
-        text_box.innerHTML = 'dealer_card_sum ='+dealer_card_sum+'YOU Lost!'
+        text_box.innerHTML = `Your hand is ${card_sum}</div> <div>Dealers hand is ${dealer_card_sum}</div><div>YOU LOST!</div>`;
         document.getElementById('reset').style.display = 'inline';
     }
     else if(dealer_card_sum == card_sum){
-        text_box.innerHTML = 'dealer_card_sum ='+dealer_card_sum+' Draw'
+        text_box.innerHTML = `Your hand is ${card_sum}</div> <div>Dealers hand is ${dealer_card_sum}</div><div>DRAW!</div>`;
         balance = Number(balance) + Number(bet_amount);
         document.getElementById('reset').style.display = 'inline';
     }

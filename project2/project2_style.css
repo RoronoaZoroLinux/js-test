@@ -62,7 +62,7 @@ padding: 0;
 
 .newCards{
     display: flex;
-    flex-wrap: wrap;
+    
     gap : 10px;
     margin-top: 10px;
 }
@@ -174,9 +174,15 @@ font-weight: bolder;
 #dealer{
     display: flex; 
     flex-direction: column;
+   
 }
 
 #dealer div{
     display: flex;
-    flex-wrap: wrap;
+    
+    
+}
+
+#dealer_new_cards div{
+    display:inline;
 }
