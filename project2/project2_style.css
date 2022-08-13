@@ -5,12 +5,13 @@
 
 .content{
     display: flex;
+    padding-top: 10px;
+    padding-bottom: 20px;
 
 }
 
 
-.blackjack-game,
-#dealer{
+.blackjack-game{
 
 margin: 20px;
 background: linear-gradient(180deg, rgb(158, 242, 173) 0%, rgb(6, 164, 51) 53%, rgb(7, 98, 24) 100%);
@@ -25,14 +26,7 @@ gap: 3px;
 
 }
 
-#dealer{
-    height: 350px;
-    
-}
-#dealer div{
-    gap : 5px;
-    margin-top: 5px;
-}
+
 
 .card{
 display: flex;
@@ -45,11 +39,14 @@ border-radius: 7px;
 justify-content: space-between;
 box-shadow: 2px 3px rgba(0, 0, 0, 0.5);;
 
+
+
 }
 
 .card p {
 margin: 0;
 padding: 0;
+
 
 }
 
@@ -60,14 +57,9 @@ padding: 0;
 
 }
 
-.newCards{
-    display: flex;
-    flex-wrap: wrap;
-    gap : 10px;
-    margin-top: 10px;
-}
 
-
+#dealer_card_1,
+#dealer_card_2,
 #card1,
 #card2,
 .backside{
@@ -77,8 +69,8 @@ padding: 0;
     color:white;
     font-size: 42px;
     
+    
 }
-
 
 #game_controller{
     background: linear-gradient(90deg, rgb(255, 244, 217) 0%, rgb(228, 221, 221) 43%, rgb(219, 199, 199) 100%);
@@ -170,12 +162,9 @@ font-weight: bolder;
     display: none;
 }
 
-#dealer{
-    display: flex; 
-    flex-direction: column;
-}
-
-#dealer div{
-    display: flex;
-    flex-wrap: wrap;
+.newCards{
+    margin-top: 10px;
+   gap : 10px;
+   flex-wrap: wrap; 
+   display: flex;
 }

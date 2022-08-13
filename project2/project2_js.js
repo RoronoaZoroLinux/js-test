@@ -1,15 +1,26 @@
 var deck = Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,52,51,50,49,48,47,46,45,44,43,42,41,40,39,38,37,36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1);
 let deal_audio = new Audio('../sounds/deal_card.mp3');
 let text_box = document.getElementById('text_box');
-let text_box_card_name = 'null';
 let card_sum = 0;
 let bet_amount = 0;
-let balance = 100;
-let ace_count = 0;
+
 let test_case_a = false;
 let test_case_b = false;
+
+let ace_count = 0;
 let ace = false;
 let ace2 = false;
+
+let balance = 100;
+let text_box_card_name = 'null';
+
+let dealer_card_sum = 0;
+
+let dealer_ace_count = 0;
+let dealer_ace = false;
+let dealer_ace2 = false;
+
+let dealer_text_box_card_name = 'null';
 
 
 function drawCard(){
@@ -26,11 +37,15 @@ function drawCard(){
 }
 
 
-function render(canvasName){
+function render(canvasName , dealer){
+    
     let newCard =  drawCard();
+   
     let cardName;
+   
     let symbolName1 = 'symbol1'+canvasName;
     let symbolName2 = 'symbol2'+canvasName;
+   
     let symbol1 = document.getElementById(symbolName1);
     let symbol2 = document.getElementById(symbolName2);
    
@@ -48,9 +63,9 @@ function render(canvasName){
             }
             
             else{
-                if(newCard == 24 )  cardName ='<div>&#128115;&#127999; <div>Jack</div>';
-                if(newCard == 25 )  cardName ='<div>&#128120;&#127999; <div>Queen</div>';
-                if(newCard == 26 )  cardName ='<div>&#129332;&#127999; <div>King</div>'; 
+                if(newCard == 24 )  cardName ='<div>&#128115;&#127999;</div> <div>Jack</div>';
+                if(newCard == 25 )  cardName ='<div>&#128120;&#127999;</div> <div>Queen</div>';
+                if(newCard == 26 )  cardName ='<div>&#129332;&#127999;</div> <div>King</div>'; 
                 
             }
         
@@ -82,9 +97,9 @@ function render(canvasName){
                 cardName = (newCard - 39);
             }
             else{
-                if(newCard == 50 )  cardName ='<div>&#128113;&#127997;</div><div>Jack</div>';
-                if(newCard == 51 )  cardName ='<div>&#128105;&#127997;</div><div>Queen</div>';
-                if(newCard == 52 )  cardName ='<div>&#129332;&#127995;</div><div>King</div>'; 
+                if(newCard == 50 )  cardName ='<div>&#128113;&#127997;</div> <div>Jack</div>';
+                if(newCard == 51 )  cardName ='<div>&#128105;&#127997;</div> <div>Queen</div>';
+                if(newCard == 52 )  cardName ='<div>&#129332;&#127995;</div> <div>King</div>'; 
                 
             }
             }
@@ -99,9 +114,9 @@ function render(canvasName){
                 cardName = newCard;
             }
             else{
-                if(newCard == 11 )  cardName ='<div>&#128113;&#127995;</div><div>Jack</div>';
-                if(newCard == 12 )  cardName ="<div>&#128105;&#127995;</div><div>Queen</div>";
-                if(newCard == 13 )  cardName ="<div>&#129332;&#127995;</div><div>King</div>"; 
+                if(newCard == 11 )  cardName ='<div>&#128113;&#127995;</div> <div>Jack</div>';
+                if(newCard == 12 )  cardName ="<div>&#128105;&#127995;</div> <div>Queen</div>";
+                if(newCard == 13 )  cardName ="<div>&#129332;&#127995;</div> <div>King</div>"; 
                 
             }
 
@@ -121,37 +136,90 @@ function render(canvasName){
     }
 
     document.getElementById(canvasName).innerHTML = cardName;
-    text_box_card_name = cardName;
+    
     
     if(typeof(cardName)=="string"){
         
-        card_sum = Number(card_sum) + Number(10);
+
+        if(dealer == true){
+            dealer_card_sum = Number(dealer_card_sum) + Number(10);
+        }
+
+        else if(dealer == false){
+            card_sum = Number(card_sum) + Number(10);
+        }
+
+       
     }
     else if(typeof(cardName)=="number"){
 
         if (cardName == 1){ 
 
-            ace_count++;
+
+
+            if(dealer == false){
+                ace_count++;
            
-            if(ace == false){
-                card_sum = card_sum + Number(10);
-                ace = true;
+                if(ace == false){
+                    card_sum = card_sum + Number(10);
+                    ace = true;
+                }
+                
+            }
+
+
+            if(dealer == true){
+                dealer_ace_count++;
+           
+                if(dealer_ace == false){
+                    dealer_card_sum = dealer_card_sum + Number(10);
+                    dealer_ace = true;
+                }
+                
             }
             
         }
         
-
-        card_sum = Number(card_sum) + Number(cardName);
+        if(dealer == false){
+            card_sum = Number(card_sum) + Number(cardName);
+        }
+        else if(dealer == true){
+            dealer_card_sum = Number(dealer_card_sum) + Number(cardName);
+        }
+       
        
     }
 
+            if(dealer == false){
+                
+                if(card_sum > 21 && ace_count && ace2 == false ){
 
-    if(card_sum > 21 && ace_count && ace2 == false ){
+                    card_sum = card_sum - 10;
+                    ace2 = true;
 
-        card_sum = card_sum - 10;
-        ace2 = true;
+                }
+            }
 
-    }
+            else if(dealer == true){
+                
+                if(dealer_card_sum > 21 && dealer_ace_count && dealer_ace2 == false ){
+
+                    dealer_card_sum = dealer_card_sum - 10;
+                    dealer_ace2 = true;
+
+                }
+            }
+
+
+            if(dealer == false){
+                text_box_card_name = card_sum;
+            }
+        
+            else if(dealer == true){
+                dealer_text_box_card_name = dealer_card_sum;
+            }
+            
+
 
     }//end of deck > 1
 
@@ -174,7 +242,8 @@ function newCard(){
 let newCardCount = 3;
 
 
-function funct_draw_card(){
+function funct_draw_card(dealer){
+
     const newDiv = document.createElement("div");
     newDiv.classList.add('card');
 
@@ -203,19 +272,43 @@ function funct_draw_card(){
         newDiv.appendChild(newDivsymbol2);
 
    
-    document.getElementById("newCardsid").appendChild(newDiv);
-    let canvasname ='canvas'+ newCardCount;
+            
+    if(dealer == true){
+    
+        document.getElementById("dealer_new_cards").appendChild(newDiv);
+    }
 
-    render(canvasname);
+    else if(dealer == false){
+        document.getElementById("newCardsid").appendChild(newDiv);
+    }
+   
+  
+    let canvasname = 'null';
+    
+    if(dealer == true){
+    
+        canvasname ='canvas'+ newCardCount;
+    }
+
+    else if(dealer == false){
+        canvasname ='canvas'+ newCardCount;
+    }
+  
+    
+
+    render(canvasname,dealer);
+
     newCardCount++;
     document.getElementById("deck_count").innerHTML = deck.length;
     deal_audio.play();
     
-    if(card_sum <= 21){
+    if(!dealer && card_sum <= 21){
         text_box.innerText = `You've placed $${bet_amount} \n Your hand is ${card_sum}`;
     }
-    else if(card_sum > 21){
+    else if(!dealer && card_sum > 21){
+       
         text_box.innerText = `Your hand is ${card_sum} and you busted! \n you've lost $${bet_amount}`;
+       
         document.getElementById('draw_card').style.display = 'none';
         document.getElementById('reset').style.display = 'inline';
     }
@@ -226,13 +319,54 @@ function funct_draw_card(){
 
 
 function funct_start(){
-
-    document.getElementById('card1').id = 'front1';
-    render('canvas');
-    deal_audio.play();
-    text_box.innerHTML = `Your first card is ${text_box_card_name}\nPlace a bet to continue.`;
-    document.getElementById("bet_buttons").style.display = "flex";
+    
+    
     document.getElementById("start_button").style.display = "none";
+    document.getElementById('card1').id = 'front1';
+    render('canvas',false);
+    deal_audio.play();
+    text_box.innerHTML = `Your first card is ${text_box_card_name}`;
+    
+   
+    setTimeout(function(){
+     
+        deal_audio.play();
+
+        document.getElementById('dealer_card_1').id = 'dealer_front1';
+       
+        render('canvasdealer1',true);
+        
+        
+    
+    }, 800); 
+
+
+    setTimeout(function(){
+
+       
+
+        text_box.innerHTML = `Your first card is ${text_box_card_name}<div>Dealer's hand is ${dealer_text_box_card_name}</div>`;
+    
+        
+    
+    }, 800); 
+
+   
+    setTimeout(function(){
+
+       
+
+        
+        text_box.innerHTML = `Your first card is ${text_box_card_name}<div>Dealer's hand is ${dealer_text_box_card_name}</div><div>Place a bet to continue</div>`;
+        document.getElementById("bet_buttons").style.display = "flex";
+        
+    
+    }, 2000); 
+
+   
+  
+
+    
 
     if(balance<1){
         
@@ -247,9 +381,14 @@ function funct_start(){
 function reset(){
 
     let parent = document.getElementById('newCardsid');
+    let parent_dealer = document.getElementById('dealer_new_cards');
 
     while (parent.firstChild) {
         parent.firstChild.remove()
+    }
+
+    while (parent_dealer.firstChild) {
+        parent_dealer.firstChild.remove()
     }
 
 
@@ -265,18 +404,43 @@ document.getElementById('symbol2canvas2').innerHTML = ' ';
 document.getElementById('canvas').innerText = " ";
 document.getElementById('canvas2').innerText = " ";
 
-document.getElementById('reset').style.display = 'none';
+document.getElementById('dealer_front1').id = 'dealer_card_1';
 
+if(document.getElementById('dealer_front2')){
+document.getElementById('dealer_front2').id = 'dealer_card_2';
+}
+
+document.getElementById('symbol1canvasdealer1').innerHTML = ' ';
+document.getElementById('symbol2canvasdealer1').innerHTML = ' ';
+
+document.getElementById('canvasdealer1').innerText = " ";
+
+document.getElementById('symbol1canvasdealer2').innerHTML = ' ';
+document.getElementById('symbol2canvasdealer2').innerHTML = ' ';
+
+document.getElementById('canvasdealer2').innerText = " ";
+
+
+
+
+document.getElementById('reset').style.display = 'none';
 document.getElementById('start_button').style.display = 'inline';
 text_box.innerHTML = 'Press "Start" to reveal your first card.';
 document.getElementById('entered_bet').innerHTML = '0';
+
+
+
+
 
 bet_amount = 0;
 card_sum = 0;
 ace_count = 0;
 ace = false;
 ace2 = false;
-
+dealer_card_sum = 0;
+dealer_ace_count = 0;
+dealer_ace = false;
+dealer_ace2 = false;
 
 }
 
@@ -306,7 +470,7 @@ function funct_enter_bet(){
 function funct_second_card(){
 
     document.getElementById('card2').id = 'front2';
-    render('canvas2');
+    render('canvas2',false);
     deal_audio.play();
     document.getElementById('second_card').style.display ='none';
     text_box.innerText = `You've placed $${bet_amount} \n Your hand is ${card_sum}`;
@@ -314,35 +478,70 @@ function funct_second_card(){
 
 }
 
+
+
 function funct_stay(){
    
     document.getElementById('draw_card').style.display = 'none';
-    let kasa = Math.floor( Number(( Math.random() * 11 )) +Number(( Math.random() * 11 )) );
     
-    if(kasa < 17){
-        while(kasa < 17){
-        kasa = Number(kasa) +  Number(Math.floor( Math.random() * 11  ));
-         }
+    
+    dealers2();
+
+    if(dealer_card_sum < 17){
+
+        dealer_draw_card();
+    }
+    else if(dealer_card_sum >= 17){
+       end_round()
     }
 
-    if(kasa < card_sum || kasa > 22){
-        text_box.innerHTML = 'kasa ='+kasa+'YOU WIN!'
+
+
+    
+}
+
+function dealers2(){
+deal_audio.play();
+document.getElementById('dealer_card_2').id = 'dealer_front2';
+render('canvasdealer2',true);
+}
+
+
+
+
+
+
+const dealer_draw_card = async () => {
+ 
+    while ( dealer_card_sum < 17 ) {
+    await new Promise(r => setTimeout(r, 1000));
+    funct_draw_card(true);
+    text_box.innerHTML = `You've placed $${bet_amount} <div>Your hand is ${card_sum}</div><div>Dealers hand is ${dealer_card_sum}</div>`;
+  }
+  end_round();
+  
+}
+
+
+  
+function end_round(){
+
+    if(dealer_card_sum < card_sum || dealer_card_sum > 22){
+        text_box.innerHTML = `Your hand is ${card_sum}</div> <div>Dealers hand is ${dealer_card_sum}</div><div style='background-color : yellow;'>YOU WIN!</div>`;
 
         balance = Number(balance) + Number(bet_amount * 2);
         document.getElementById('balance').innerHTML = 'Balance $'+balance;
         document.getElementById('reset').style.display = 'inline';
     }
-    else if(kasa > card_sum && kasa < 22){
-        text_box.innerHTML = 'kasa ='+kasa+'YOU Lost!'
+    else if(dealer_card_sum > card_sum && dealer_card_sum < 22){
+        text_box.innerHTML = `Your hand is ${card_sum}</div> <div>Dealers hand is ${dealer_card_sum}</div><div>YOU LOST!</div>`;
         document.getElementById('reset').style.display = 'inline';
     }
-    else if(kasa == card_sum){
-        text_box.innerHTML = 'kasa ='+kasa+' Draw'
+    else if(dealer_card_sum == card_sum){
+        text_box.innerHTML = `Your hand is ${card_sum}</div> <div>Dealers hand is ${dealer_card_sum}</div><div>DRAW!</div>`;
         balance = Number(balance) + Number(bet_amount);
         document.getElementById('reset').style.display = 'inline';
     }
 
-    
+
 }
-
-
