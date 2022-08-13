@@ -58,6 +58,8 @@ function render(canvasName , dealer){
    
     let symbol1 = document.getElementById(symbolName1);
     let symbol2 = document.getElementById(symbolName2);
+
+   
    
     if(deck.length > -1){
         
@@ -73,9 +75,23 @@ function render(canvasName , dealer){
             }
             
             else{
-                if(newCard == 24 )  cardName ='<div>&#128115;&#127999;</div> <div>Jack</div>';
-                if(newCard == 25 )  cardName ='<div>&#128120;&#127999;</div> <div>Queen</div>';
-                if(newCard == 26 )  cardName ='<div>&#129332;&#127999;</div> <div>King</div>'; 
+        
+                if(newCard == 24 )  {
+                    cardName ='<div class="royal3"></div>';
+                    symbol1.innerText = "J";
+                }
+
+                if(newCard == 25 ) { 
+                    cardName ='<div class="royal2"></div>';
+                    symbol1.innerText = "Q";
+                } 
+
+
+                    
+                if(newCard == 26 ) {
+                    cardName ='<div class="royal1"></div>'; 
+                    symbol1.innerText = "K";
+                } 
                 
             }
         
@@ -90,9 +106,20 @@ function render(canvasName , dealer){
                 cardName = (newCard - 26);
             }
             else{
-                if(newCard == 39 )  cardName ='<div>&#128113;</div> <div>Jack</div>';
-                if(newCard == 38 )  cardName ='<div>&#128105;</div> <div>Queen</div>';
-                if(newCard == 37 )  cardName ='<div>&#129332;</div> <div>King</div>'; 
+                if(newCard == 37 )  {
+                    cardName ='<div class="royal3"></div>';
+                    symbol1.innerText = "J";
+                }
+                if(newCard == 38 ) { 
+                    cardName ='<div class="royal2"></div>';
+                    symbol1.innerText = "Q";
+                } 
+                    
+                if(newCard == 39 ) {
+                    cardName ='<div class="royal1"></div>'; 
+                    symbol1.innerText = "K";
+                } 
+                
                 
             }
         
@@ -107,9 +134,20 @@ function render(canvasName , dealer){
                 cardName = (newCard - 39);
             }
             else{
-                if(newCard == 50 )  cardName ='<div>&#128113;&#127997;</div> <div>Jack</div>';
-                if(newCard == 51 )  cardName ='<div>&#128105;&#127997;</div> <div>Queen</div>';
-                if(newCard == 52 )  cardName ='<div>&#129332;&#127995;</div> <div>King</div>'; 
+                if(newCard == 50 )  {
+                    cardName ='<div class="royal3"></div>';
+                    symbol1.innerText = "J";
+                }
+                if(newCard == 51 ) { 
+                    cardName ='<div class="royal2"></div>';
+                    symbol1.innerText = "Q";
+                } 
+                    
+                if(newCard == 52 ) {
+                    cardName ='<div class="royal1"></div>'; 
+                    symbol1.innerText = "K";
+                } 
+                
                 
             }
             }
@@ -124,9 +162,20 @@ function render(canvasName , dealer){
                 cardName = newCard;
             }
             else{
-                if(newCard == 11 )  cardName ='<div>&#128113;&#127995;</div> <div>Jack</div>';
-                if(newCard == 12 )  cardName ="<div>&#128105;&#127995;</div> <div>Queen</div>";
-                if(newCard == 13 )  cardName ="<div>&#129332;&#127995;</div> <div>King</div>"; 
+                if(newCard == 11 )  {
+                    cardName ='<div class="royal3"></div>';
+                    symbol1.innerText = "J";
+                }
+                if(newCard == 12 ) { 
+                    cardName ='<div class="royal2"></div>';
+                    symbol1.innerText = "Q";
+                } 
+                    
+                if(newCard == 13 ) {
+                    cardName ='<div class="royal1"></div>'; 
+                    symbol1.innerText = "K";
+                } 
+                
                 
             }
 
@@ -645,3 +694,5 @@ function change_theme(event) {
       }
     
   }
+
+ 

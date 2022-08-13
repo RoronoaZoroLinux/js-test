@@ -33,7 +33,7 @@ display: flex;
 flex-direction: column;
 width: 110px;
 height: 150px;
-background-color: rgb(230, 230, 230);
+background-color: rgb(255, 255, 255);
 border: 2px solid black;
 border-radius: 7px;
 justify-content: space-between;
@@ -223,3 +223,34 @@ font-weight: bolder;
     color: aliceblue;
     padding :2px;
 }
+
+.royal1,
+.royal2,
+.royal3{
+
+background: url(../img/royals.png) no-repeat;
+width: 64px;
+height: 64px;
+transform: scale(1.4);
+
+
+}
+
+.royal1{
+
+    background-position: 0px;
+
+}
+
+.royal2{
+
+    background-position: -64px;
+
+}
+
+.royal3{
+
+    background-position: -128px;
+
+}
+
