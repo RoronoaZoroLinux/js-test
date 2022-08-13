@@ -168,3 +168,44 @@ font-weight: bolder;
    flex-wrap: wrap; 
    display: flex;
 }
+
+
+@media (max-height : 1200px)  {
+    body{
+
+       
+        zoom : 70%;
+       
+    }
+
+}
+@media (max-height : 900px)  {
+    body{
+
+       
+        zoom : 66%;
+       
+    }
+
+}
+
+@media (max-height : 800px)  {
+    body{
+
+       
+        zoom : 50%;
+       
+    }
+
+}
+
+
+
+
+
+.footer{
+   height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
