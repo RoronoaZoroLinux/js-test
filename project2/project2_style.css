@@ -203,9 +203,23 @@ font-weight: bolder;
 
 
 
-.footer{
+#footer{
    height: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
   }
+
+
+  #toggle{
+    color : wheat;
+    border-radius: 8px;
+    
+}
+
+#theme_selector{
+    border-radius: 8px;
+    background-color: black;
+    color: aliceblue;
+    padding :2px;
+}
