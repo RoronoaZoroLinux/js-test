@@ -1,3 +1,8 @@
+document.getElementById("toggle").style.backgroundColor = '#343454';
+
+let theme_selector = document.getElementById("theme_selector");
+theme_selector.addEventListener("change", change_theme);
+
 var deck = Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,52,51,50,49,48,47,46,45,44,43,42,41,40,39,38,37,36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1);
 let deal_audio = new Audio('../sounds/deal_card.mp3');
 let text_box = document.getElementById('text_box');
@@ -22,6 +27,11 @@ let dealer_ace2 = false;
 
 let dealer_text_box_card_name = 'null';
 
+let day = true;
+let night = false;
+let green = true;
+let paper = false;
+let dark = false;
 
 function drawCard(){
     let randomCard;
@@ -545,3 +555,93 @@ function end_round(){
 
 
 }
+
+
+
+
+function day_night_toggle(){
+
+if(day){
+gece();
+day = false;
+night = true;
+}
+else if (night){
+    gunduz();
+    night = false;
+    day = true;
+}
+
+}
+
+function gece(){
+    document.body.style.backgroundColor = '#22222f';
+    
+    document.getElementById("content").style.backgroundColor = '#343454';
+    dark_theme();
+    document.getElementById('big-header').style.backgroundColor = '#292727';
+    document.getElementById('big-header').style.color = 'white';
+    document.getElementById("footer").style.color = "wheat"
+    document.getElementById("cuteid").innerHTML = '<img src="../img/cutesleep.png" alt="cute dino"> <a href="../index.html"><br>NoteHub</a>';
+    document.getElementById("toggle").innerText = 'Day Mode';
+    document.getElementById("toggle").style.backgroundColor = '#9a6559';
+    
+
+}
+
+function gunduz(){
+
+    document.body.style.backgroundColor = '#bfbdaa';
+    
+    document.getElementById("content").style.backgroundColor = '#9a6559';
+    green_theme();
+    document.getElementById('big-header').style.backgroundColor = '#e7e9dc';
+    document.getElementById('big-header').style.color = '#654f12';
+    document.getElementById("footer").style.color = "black"
+    document.getElementById("cuteid").innerHTML = '<img src="../img/cute.png" alt="cute dino"> <a href="../index.html"><br>NoteHub</a>';
+    document.getElementById("toggle").innerText = 'Night Mode';
+    document.getElementById("toggle").style.backgroundColor = '#343454';
+    
+}
+
+function green_theme(){
+
+document.getElementById('table1').style.background = 'linear-gradient(180deg, rgb(158, 242, 173) 0%, rgb(6, 164, 51) 53%, rgb(7, 98, 24) 100%';
+document.getElementById('table2').style.background = 'linear-gradient(180deg, rgb(158, 242, 173) 0%, rgb(6, 164, 51) 53%, rgb(7, 98, 24) 100%';
+
+}
+
+function paper_theme(){
+
+document.getElementById('table1').style.background = 'linear-gradient(180deg, rgba(242,238,158,1) 0%, rgba(255,249,161,1) 53%, rgba(215,218,121,1) 100%)';
+document.getElementById('table2').style.background = 'linear-gradient(180deg, rgba(242,238,158,1) 0%, rgba(255,249,161,1) 53%, rgba(215,218,121,1) 100%)';   
+
+}
+
+function dark_theme(){
+
+    document.getElementById('table1').style.background = 'linear-gradient(180deg, rgb(61 103 69) 0%, rgb(11 83 31) 53%, rgb(15 28 18) 100%)';
+    document.getElementById('table2').style.background = 'linear-gradient(180deg, rgb(61 103 69) 0%, rgb(11 83 31) 53%, rgb(15 28 18) 100%)';
+    
+}
+
+function purple_theme(){
+
+    document.getElementById('table1').style.background = 'linear-gradient(180deg, rgba(41,46,240,1) 0%, rgba(69,65,168,1) 60%, rgba(66,63,111,1) 100%)';
+    document.getElementById('table2').style.background = 'linear-gradient(180deg, rgba(41,46,240,1) 0%, rgba(69,65,168,1) 60%, rgba(66,63,111,1) 100%)';
+    
+}
+
+function change_theme(event) {
+    if (theme_selector.value == 'green') {
+      green_theme();
+    } else if (theme_selector.value == 'paper') {
+      paper_theme();
+    } else if (theme_selector.value == 'dark') {
+      dark_theme();
+    }
+    else if (theme_selector.value == 'purple') {
+        purple_theme();
+      }
+    
+  }

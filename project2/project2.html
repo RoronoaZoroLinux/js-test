@@ -21,25 +21,26 @@
 
 
         <div class="div-main">      
-        <span class="big-header"><h1>BlackJack</h1></span>
+        <span class="big-header" id="big-header"><h1>BlackJack</h1></span>
 
         <div class="div-organizer">
 
 
-        <div class="cute">
+        <div class="cute" id="cuteid">
             <img src="../img/cute.png" alt="cute dino">
-            <a href="../index.html"><br>[ NoteHub ]</a>
+            <a href="../index.html"><br>NoteHub</a>
+            
         </div>
+        
 
-
-        <div class="content">
+        <div class="content" id="content">
 
 
             <div style="display:flex; flex-direction:column; font-size: 36px; ">
                 <span style="color: gold; font-weight: bold; background-color: rgb(0, 0, 0); width: 300px; align-self: center; text-align:center; border-radius: 12px;">Dealer's cards</span>
-                <div class="blackjack-game">
+                <div class="blackjack-game" id="table1">
                  
-                    <div class="table">
+                    <div class="table" >
                         <div class="card" id="dealer_card_1">
                             <p id="symbol1canvasdealer1"></p>
                             <p id="canvasdealer1" style=" text-align:center;"></p>
@@ -79,7 +80,7 @@
       
         <div style="display:flex; flex-direction:column; font-size: 36px; ">
             <span style="color: gold; font-weight: bold; background-color: rgb(0, 0, 0); width: 300px; align-self: center; text-align:center; border-radius: 12px;">Your cards</span>
-            <div class="blackjack-game">
+            <div class="blackjack-game"  id="table2" >
              
                 <div class="table">
                     <div class="card" id="card1">
@@ -168,8 +169,22 @@
     <button onclick="test_case_b = true">draw 10</button>
     <button onclick="test_case_b = false">dont draw 10</button>
     </div>
+    
+    <div id="footer">created by &nbsp;<a href="https://github.com/RoronoaZoroLinux">RoronoaZoroLinux</a>&nbsp;in August 2022</div>
+    <div><center><button onclick="day_night_toggle()" id="toggle">Night Mode</button> <select id="theme_selector">
+        <option value="green">Theme : Green</option>
+        <option value="paper">Theme : Paper</option>
+        <option value="dark">Theme : Dark</option>
+        <option value="purple">Theme : Purple</option>
+        
+      </select>  </center></div>
+    
+    
 
-    <div class="footer">created by &nbsp;<a href="https://github.com/RoronoaZoroLinux">RoronoaZoroLinux</a>&nbsp;in August 2022</div>
     <script src="project2_js.js"></script>
+  
+   
+
+
     </body>
 </html>
