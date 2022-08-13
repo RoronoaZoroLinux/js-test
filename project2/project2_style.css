@@ -5,6 +5,8 @@
 
 .content{
     display: flex;
+    padding-top: 10px;
+    padding-bottom: 20px;
 
 }
 
@@ -45,27 +47,25 @@ border-radius: 7px;
 justify-content: space-between;
 box-shadow: 2px 3px rgba(0, 0, 0, 0.5);;
 
+
+
 }
 
 .card p {
 margin: 0;
 padding: 0;
 
+
 }
 
-.table{
+.table,
+#dealer{
 
     display: flex;
     gap : 10px;
 
 }
 
-.newCards{
-    display: flex;
-    
-    gap : 10px;
-    margin-top: 10px;
-}
 
 #dealer_card_1,
 #dealer_card_2,
@@ -77,9 +77,9 @@ padding: 0;
     background: linear-gradient(90deg, rgb(164, 6, 6) 0%, rgba(253,29,29,1) 43%, rgb(121, 49, 49) 100%);
     color:white;
     font-size: 42px;
+    display: inline;
     
 }
-
 
 #game_controller{
     background: linear-gradient(90deg, rgb(255, 244, 217) 0%, rgb(228, 221, 221) 43%, rgb(219, 199, 199) 100%);
@@ -178,7 +178,7 @@ font-weight: bolder;
 }
 
 #dealer div{
-    display: flex;
+    display: inline-flex;
     
     
 }
@@ -186,3 +186,4 @@ font-weight: bolder;
 #dealer_new_cards div{
     display:inline;
 }
+

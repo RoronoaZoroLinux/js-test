@@ -306,7 +306,9 @@ function funct_draw_card(dealer){
         text_box.innerText = `You've placed $${bet_amount} \n Your hand is ${card_sum}`;
     }
     else if(!dealer && card_sum > 21){
+       
         text_box.innerText = `Your hand is ${card_sum} and you busted! \n you've lost $${bet_amount}`;
+       
         document.getElementById('draw_card').style.display = 'none';
         document.getElementById('reset').style.display = 'inline';
     }
@@ -401,17 +403,17 @@ document.getElementById('symbol2canvas2').innerHTML = ' ';
 
 document.getElementById('canvas').innerText = " ";
 document.getElementById('canvas2').innerText = " ";
-/////////////////////////////////////////////////////
 
 document.getElementById('dealer_front1').id = 'dealer_card_1';
+
+if(document.getElementById('dealer_front2')){
 document.getElementById('dealer_front2').id = 'dealer_card_2';
+}
 
 document.getElementById('symbol1canvasdealer1').innerHTML = ' ';
 document.getElementById('symbol2canvasdealer1').innerHTML = ' ';
 
 document.getElementById('canvasdealer1').innerText = " ";
-
-///////
 
 document.getElementById('symbol1canvasdealer2').innerHTML = ' ';
 document.getElementById('symbol2canvasdealer2').innerHTML = ' ';
@@ -419,7 +421,6 @@ document.getElementById('symbol2canvasdealer2').innerHTML = ' ';
 document.getElementById('canvasdealer2').innerText = " ";
 
 
-/////////////////////////////////////////////////////
 
 
 document.getElementById('reset').style.display = 'none';
@@ -427,7 +428,6 @@ document.getElementById('start_button').style.display = 'inline';
 text_box.innerHTML = 'Press "Start" to reveal your first card.';
 document.getElementById('entered_bet').innerHTML = '0';
 
-/////////////////////////////////////////////////
 
 
 
