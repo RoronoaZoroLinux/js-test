@@ -4,6 +4,7 @@ let theme_selector = document.getElementById("theme_selector");
 theme_selector.addEventListener("change", change_theme);
 
 var deck = Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,52,51,50,49,48,47,46,45,44,43,42,41,40,39,38,37,36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1);
+let deck2 = deck;
 let deal_audio = new Audio('../sounds/deal_card.mp3');
 let coins_audio = new Audio('../sounds/coins.mp3');
 let meh_audio = new Audio('../sounds/meh.mp3');
@@ -34,10 +35,34 @@ let day = true;
 let night = false;
 
 
+function shuffle(deck)
+{
+	// for 1000 turns
+	// switch the values of two random cards
+	for (let i = 0; i < 1000; i++)
+	{
+		let location1 = Math.floor((Math.random() * deck.length));
+		let location2 = Math.floor((Math.random() * deck.length));
+		let tmp = deck[location1];
+
+		deck[location1] = deck[location2];
+		deck[location2] = tmp;
+	}
+}
+
+shuffle(deck);
+
+
 function drawCard(){
     let randomCard;
-    randomCard = Math.floor( Math.random() * deck.length +1 );
-    deck.splice(deck.indexOf(randomCard),1);
+   
+    randomCard = deck.pop();
+
+
+
+
+
+
     if(randomCard > 52){
         randomCard = randomCard - 52;
     }
@@ -551,6 +576,7 @@ function funct_stay(){
     
     
     dealers2();
+    
 
     if(dealer_card_sum < 17){
 
@@ -705,4 +731,13 @@ function change_theme(event) {
   }
 
 
+function render_all(){
+
+    let a = 0;
+    while( a < deck.length){
+    
+        funct_draw_card(true)
+    
+    }
+}
 
