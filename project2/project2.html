@@ -21,7 +21,9 @@
 
 
         <div class="div-main">      
-        <span class="big-header" id="big-header"><h1>BlackJack</h1></span>
+        <span class="big-header" id="big-header" style="text-align: center;"><h1>BlackJack <span class="slidecontainer">
+            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+        </span></h1></span>
 
         <div class="div-organizer">
 
@@ -29,6 +31,7 @@
         <div class="cute" id="cuteid">
             <img src="../img/cute.png" alt="cute dino">
             <a href="../index.html"><br>NoteHub</a>
+            
             
         </div>
         
@@ -100,7 +103,7 @@
 
                     <div class="card backside" id="deck_count">
 
-                      102
+                      104
 
                     
                     </div>
@@ -158,19 +161,8 @@
          
 
     </div>  
+ 
 
-
-
-  
-    <div style="display:none;">
-    <button onclick="test_case_a = true">draw 1</button>
-    <button onclick="test_case_a = false">dont draw 1</button>
-
-    <button onclick="test_case_b = true">draw 10</button>
-    <button onclick="test_case_b = false">dont draw 10</button>
-    </div>
-    
-    <div id="footer">created by &nbsp;<a href="https://github.com/RoronoaZoroLinux">RoronoaZoroLinux</a>&nbsp;in August 2022</div>
     <div><center><button onclick="day_night_toggle()" id="toggle">Night Mode</button> <select id="theme_selector">
         <option value="green">Theme : Green</option>
         <option value="paper">Theme : Paper</option>
@@ -180,8 +172,31 @@
       </select>  </center></div>
     
     
+      <div style="margin-top: 1em;" id="try"><center>Also try Landscape Mode on your phone!<div style="font-size: 28px; font-weight: lighter; font-style: italic;">Unfortunately Mozilla Firefox is currently not supported.</div><div><a onclick="document.getElementById('cheats').style.display = 'inline'">Cheats</a>  <select id="cheats">
+        <option value="draw1">Draw 1</option>
+        <option value="draw10">Draw 10</option>
+        <option value="drawrandom">Draw Random</option>
+        <option value="give">Give $1000</option>
+        <option value="render">Render All Cards</option>
 
-    <script src="project2_js.js"></script>
+      </select>
+</div></center></div>
+      <div id="footer">created by &nbsp;<a href="https://github.com/RoronoaZoroLinux">RoronoaZoroLinux</a>&nbsp;in August 2022</div >
+    
+        
+    
+
+        
+
+
+
+
+
+
+      
+
+        
+        <script src="project2_js.js"></script>
   
    
 
