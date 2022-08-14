@@ -260,3 +260,15 @@ height: 64px;
     cursor: pointer;
     box-shadow: 0.4vh 0.6vh rgba(0, 0, 0, 0.6);
   }
+
+  @media (orientation: landscape) {
+    body {
+      zoom: 0.5;
+    }
+  }
+  
+  @media (orientation: portrait) {
+    body {
+      zoom: 1;
+    }
+  }
