@@ -741,3 +741,25 @@ function render_all(){
     }
 }
 
+var slider = document.getElementById("myRange");
+
+var output = document.getElementById("demo");
+output.innerHTML = slider.value; // Display the default slider value
+
+// Update the current slider value (each time you drag the slider handle)
+
+document.body.style.zoom = '0.5';
+
+
+slider.oninput = function() {
+
+    let val = this.value;
+    let val2 = val / 100 ;
+
+    if (val2 < (1/3) ){
+        
+        val2 = (1/3);
+    }
+
+  document.body.style.zoom = val2;
+}
