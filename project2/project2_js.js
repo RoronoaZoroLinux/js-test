@@ -7,6 +7,7 @@ var deck = Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,
 let deal_audio = new Audio('../sounds/deal_card.mp3');
 let coins_audio = new Audio('../sounds/coins.mp3');
 let meh_audio = new Audio('../sounds/meh.mp3');
+let switch_audio = new Audio('../sounds/switch.wav');
 let text_box = document.getElementById('text_box');
 let card_sum = 0;
 let bet_amount = 0;
@@ -616,7 +617,7 @@ function end_round(){
 
 
 function day_night_toggle(){
-
+switch_audio.play();
 if(day){
 gece();
 day = false;
