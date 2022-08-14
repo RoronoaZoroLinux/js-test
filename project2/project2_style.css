@@ -263,12 +263,15 @@ height: 64px;
 
   @media (orientation: landscape) {
     body {
-      zoom: 0.5;
+        
+        zoom: 0.5;
+
     }
   }
   
   @media (orientation: portrait) {
     body {
       zoom: 1;
+    
     }
   }

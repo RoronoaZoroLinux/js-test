@@ -756,4 +756,6 @@ slider.oninput = function() {
     }
 
   document.body.style.zoom = val2;
+
+  
 }
