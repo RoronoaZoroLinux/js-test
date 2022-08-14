@@ -3,8 +3,11 @@ document.getElementById("toggle").style.backgroundColor = '#343454';
 let theme_selector = document.getElementById("theme_selector");
 theme_selector.addEventListener("change", change_theme);
 
+let cheats = document.getElementById("cheats");
+cheats.addEventListener("change", change_cheat);
+
 var deck = Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,52,51,50,49,48,47,46,45,44,43,42,41,40,39,38,37,36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1);
-let deck2 = deck;
+
 let deal_audio = new Audio('../sounds/deal_card.mp3');
 let coins_audio = new Audio('../sounds/coins.mp3');
 let meh_audio = new Audio('../sounds/meh.mp3');
@@ -12,6 +15,8 @@ let switch_audio = new Audio('../sounds/switch.wav');
 let text_box = document.getElementById('text_box');
 let card_sum = 0;
 let bet_amount = 0;
+
+let deck_end = false;
 
 let test_case_a = false;
 let test_case_b = false;
@@ -60,9 +65,6 @@ function drawCard(){
 
 
 
-
-
-
     if(randomCard > 52){
         randomCard = randomCard - 52;
     }
@@ -85,9 +87,17 @@ function render(canvasName , dealer){
     let symbol1 = document.getElementById(symbolName1);
     let symbol2 = document.getElementById(symbolName2);
 
-   
-   
-    if(deck.length > -1){
+    if(deck.length < 1){
+        deck_end = true;
+        alert("There is no cards left in the deck. The next card that is going to be dealt will be from a new set of decks.")
+    }
+
+    if(deck_end){
+        new_deck();
+        deck_end = false;
+    }
+    
+    if(deck.length > 0){
         
         if(newCard > 13 && newCard < 27) {
             symbol1.innerText = "♣";
@@ -207,6 +217,7 @@ function render(canvasName , dealer){
 
         }
     
+    
    
     if(test_case_a == true){
 
@@ -308,12 +319,7 @@ function render(canvasName , dealer){
 
     }//end of deck > 1
 
-    else{
-        document.getElementById(canvasName).style.color = "black";
-        document.getElementById(canvasName).innerText = "No cards left.";
-        symbol1.innerText = " ";
-        symbol2.innerText = " ";
-    }
+    document.getElementById("deck_count").innerHTML = deck.length;
     
 }
 
@@ -734,7 +740,7 @@ function change_theme(event) {
 function render_all(){
 
     let a = 0;
-    while( a < deck.length){
+    while( a < deck.length -3 ){
     
         funct_draw_card(true)
     
@@ -759,3 +765,49 @@ slider.oninput = function() {
 
   
 }
+
+function new_deck(){
+deck = Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,52,51,50,49,48,47,46,45,44,43,42,41,40,39,38,37,36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1);
+shuffle(deck);
+}
+
+
+
+function change_cheat(event) {
+    if (cheats.value == 'draw1') {
+      draw_spesific(1);
+    } else if (cheats.value == 'draw10') {
+        draw_spesific(10);
+    } else if (cheats.value == 'drawrandom') {
+        draw_spesific(5);
+    } else if (cheats.value == 'give') {
+      balance += Number(1000);
+      document.getElementById('balance').innerText = "Balance $"+balance;
+    }
+    else if (cheats.value == 'render') {
+        render_all();
+      }
+    
+  }
+
+  function  draw_spesific(value){
+
+    if(value == 1){
+        test_case_a = true;
+        test_case_b = false;
+
+    }
+    else if(value == 10){
+        test_case_a = false;
+        test_case_b = true;
+        
+    }
+
+    else if(value == 5){
+        test_case_a = false;
+        test_case_b = false;
+        
+    }
+
+
+  }

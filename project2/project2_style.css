@@ -261,6 +261,10 @@ height: 64px;
     box-shadow: 0.4vh 0.6vh rgba(0, 0, 0, 0.6);
   }
 
+  #cheats{
+    display: none;
+  }
+
   @media (orientation: landscape) {
     body {
         
