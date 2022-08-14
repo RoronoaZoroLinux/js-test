@@ -3,6 +3,10 @@
     font-size: 32px;
 }
 
+:root { 
+    --zoomAmount : 100%;
+  }
+
 .content{
     display: flex;
     padding-top: 10px;

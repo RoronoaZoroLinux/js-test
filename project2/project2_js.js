@@ -5,6 +5,8 @@ theme_selector.addEventListener("change", change_theme);
 
 var deck = Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,52,51,50,49,48,47,46,45,44,43,42,41,40,39,38,37,36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1);
 let deal_audio = new Audio('../sounds/deal_card.mp3');
+let coins_audio = new Audio('../sounds/coins.mp3');
+let meh_audio = new Audio('../sounds/meh.mp3');
 let text_box = document.getElementById('text_box');
 let card_sum = 0;
 let bet_amount = 0;
@@ -29,9 +31,7 @@ let dealer_text_box_card_name = 'null';
 
 let day = true;
 let night = false;
-let green = true;
-let paper = false;
-let dark = false;
+
 
 function drawCard(){
     let randomCard;
@@ -366,8 +366,8 @@ function funct_draw_card(dealer){
     }
     else if(!dealer && card_sum > 21){
        
-        text_box.innerText = `Your hand is ${card_sum} and you busted! \n you've lost $${bet_amount}`;
-       
+        text_box.innerHTML = `<div>Your hand is ${card_sum} and you busted!</div> <div style='background-color : red;color:white; font-weight: bold;'> you've lost $ ${bet_amount} </div>`;
+        meh_audio.play();
         document.getElementById('draw_card').style.display = 'none';
         document.getElementById('reset').style.display = 'inline';
     }
@@ -532,7 +532,12 @@ function funct_second_card(){
     render('canvas2',false);
     deal_audio.play();
     document.getElementById('second_card').style.display ='none';
+    if(card_sum == 21){
+        text_box.innerHTML = `You've placed $${bet_amount} <div>Your hand is ${card_sum}</div><div style='background-color : black;color:white; font-weight: bold;'>  BLACKJACK! </div>`;
+    } 
+    else{
     text_box.innerText = `You've placed $${bet_amount} \n Your hand is ${card_sum}`;
+    }
     document.getElementById('draw_card').style.display = 'inline';
 
 }
@@ -585,19 +590,21 @@ const dealer_draw_card = async () => {
   
 function end_round(){
 
-    if(dealer_card_sum < card_sum || dealer_card_sum > 22){
-        text_box.innerHTML = `Your hand is ${card_sum}</div> <div>Dealers hand is ${dealer_card_sum}</div><div style='background-color : yellow;'>YOU WIN!</div>`;
+    if(dealer_card_sum < card_sum || dealer_card_sum > 21){
+        text_box.innerHTML = `Your hand is ${card_sum}</div> <div>Dealers hand is ${dealer_card_sum}</div><div style='background-color : green; color:white; font-weight: bold;'>YOU WIN!</div>`;
+        coins_audio.play();
 
         balance = Number(balance) + Number(bet_amount * 2);
         document.getElementById('balance').innerHTML = 'Balance $'+balance;
         document.getElementById('reset').style.display = 'inline';
     }
     else if(dealer_card_sum > card_sum && dealer_card_sum < 22){
-        text_box.innerHTML = `Your hand is ${card_sum}</div> <div>Dealers hand is ${dealer_card_sum}</div><div>YOU LOST!</div>`;
+        text_box.innerHTML = `Your hand is ${card_sum}</div> <div>Dealers hand is ${dealer_card_sum}</div><div style='background-color : red;color:white; font-weight: bold;'>YOU LOST!</div>`;
         document.getElementById('reset').style.display = 'inline';
+        meh_audio.play();
     }
     else if(dealer_card_sum == card_sum){
-        text_box.innerHTML = `Your hand is ${card_sum}</div> <div>Dealers hand is ${dealer_card_sum}</div><div>DRAW!</div>`;
+        text_box.innerHTML = `Your hand is ${card_sum}</div> <div>Dealers hand is ${dealer_card_sum}</div><div style='background-color : black;color:white; font-weight: bold;'>DRAW!</div>`;
         balance = Number(balance) + Number(bet_amount);
         document.getElementById('reset').style.display = 'inline';
     }
@@ -634,6 +641,7 @@ function gece(){
     document.getElementById("cuteid").innerHTML = '<img src="../img/cutesleep.png" alt="cute dino"> <a href="../index.html"><br>NoteHub</a>';
     document.getElementById("toggle").innerText = 'Day Mode';
     document.getElementById("toggle").style.backgroundColor = '#9a6559';
+    document.getElementById("try").style.color = "wheat"
     
 
 }
@@ -650,7 +658,7 @@ function gunduz(){
     document.getElementById("cuteid").innerHTML = '<img src="../img/cute.png" alt="cute dino"> <a href="../index.html"><br>NoteHub</a>';
     document.getElementById("toggle").innerText = 'Night Mode';
     document.getElementById("toggle").style.backgroundColor = '#343454';
-    
+    document.getElementById("try").style.color = "black"
 }
 
 function green_theme(){
@@ -695,4 +703,5 @@ function change_theme(event) {
     
   }
 
- 
+
+
