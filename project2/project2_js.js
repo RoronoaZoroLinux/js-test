@@ -48,7 +48,17 @@ let dealer_blackjack = false;
 let card_id1 = 'none';
 let card_id2 = 'none';
 
-let able_to_split = false;
+let sum_split1 = 0;
+let sum_split2 = 0;
+
+let splitted = false;
+
+let split1_ace_count = 0;
+let split2_ace_count = 0;
+
+let split1_ace = false;
+let split2_ace = false;
+
 function shuffle(deck)
 {
 	// for 1000 turns
@@ -107,6 +117,7 @@ function render(canvasName , dealer){
     }
     
     if(deck.length > 0){
+
         
         if(newCard > 13 && newCard < 27) {
             symbol1.innerText = "♣";
@@ -267,6 +278,17 @@ function render(canvasName , dealer){
             card_sum = Number(card_sum) + Number(10);
         }
 
+                    if ( dealer == 'split1'){
+
+                        sum_split1 =  Number(sum_split1) + Number(10);
+
+
+                    }    
+                    else if ( dealer == 'split2'){
+
+                        sum_split2 = Number(sum_split2) + Number(10);
+                    }   
+
        
     }
     else if(typeof(cardName)=="number"){
@@ -295,6 +317,28 @@ function render(canvasName , dealer){
                 }
                 
             }
+
+            if(dealer == 'split1'){
+                split1_ace_count++;
+
+                if(split1_ace == false){
+                    sum_split1 =sum_split1 + Number(10);
+                    dealer_ace = true;
+                }
+                
+            }
+
+            
+            if(dealer == 'split2'){
+                split2_ace_count++;
+
+                if(split2_ace == false){
+                    sum_split1 =sum_split1 + Number(10);
+                    dealer_ace = true;
+                }
+                
+            }
+            
             
         }
         
@@ -304,6 +348,18 @@ function render(canvasName , dealer){
         else if(dealer == true){
             dealer_card_sum = Number(dealer_card_sum) + Number(cardName);
         }
+
+        if ( dealer == 'split1'){
+
+            sum_split1  = Number(sum_split1) + Number(cardName);
+
+
+        }    
+        else if ( dealer == 'split2'){
+
+            sum_split2 =  Number(sum_split2) + Number(cardName);
+        }   
+
        
        
     }
@@ -345,7 +401,6 @@ function render(canvasName , dealer){
         if(card_id1 != 'none'){
 
             card_id2 = cardName;
-            able_to_split = true;
             document.getElementById("split_button").style.display = 'inline';
         }
 
@@ -363,6 +418,9 @@ function render(canvasName , dealer){
     }//end of deck > 1
 
     document.getElementById("deck_count").innerHTML = deck.length;
+    
+    console.log(sum_split1);
+    console.log(sum_split2);
     
 }
 
@@ -415,6 +473,15 @@ function funct_draw_card(dealer){
     else if(dealer == false){
         document.getElementById("newCardsid").appendChild(newDiv);
     }
+
+    else if(dealer == 'split1'){
+        document.getElementById("newCardsid").appendChild(newDiv);
+    }
+
+    else if(dealer == 'split2'){
+        document.getElementById("newCardsid").appendChild(newDiv);
+    }
+   
    
   
     let canvasname = 'null';
@@ -427,6 +494,14 @@ function funct_draw_card(dealer){
     else if(dealer == false){
         canvasname ='canvas'+ newCardCount;
     }
+    else if(dealer == 'split1'){
+        canvasname ='canvas'+ newCardCount;
+    }
+    else if(dealer == 'split2'){
+        canvasname ='canvas'+ newCardCount;
+    }
+
+
   
     
 
@@ -447,8 +522,9 @@ function funct_draw_card(dealer){
         document.getElementById('reset').style.display = 'inline';
     }
    
-}
 
+}
+  
 
 
 
@@ -579,7 +655,15 @@ blackjack = false;
 dealer_blackjack = false;
 card_id1 = 'none';
 card_id2 = 'none';
-able_to_split = false;
+
+
+ sum_split1 = 0;
+ sum_split2 = 0;
+ splitted = false;
+
+ split1_ace == false
+ split2_ace == false
+
 }
 
 function render_bet(amount){
@@ -966,6 +1050,11 @@ function change_cheat(event) {
 
   function funct_split(){
 
-    alert("split");
+    document.getElementById('split_button').style.display = 'none';
+    document.getElementById("draw_card_button").style.display = 'none';
+    document.getElementById("split_draw_buttons").style.display = 'block';
+    splitted = true;
+    sum_split1 = card_sum/2;
+    sum_split2 = card_sum/2;
 
   }

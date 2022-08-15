@@ -123,9 +123,11 @@
                 <div> <button id="start_button" onclick="funct_start()">Start</button></div>
                 <div id="draw_card">
 
-                    <button onclick="funct_draw_card(false)">Draw Card</button>
-                   
-                    <button onclick="funct_stay()">Stay</button> 
+                    <button id="draw_card_button"  onclick="funct_draw_card(false)">Draw Card</button>
+                    
+                    <span id="split_draw_buttons" style="display :none;"><button style="margin: 1em;" onclick="funct_draw_card('split1')">Draw for first split</button style="margin: 1em;"><button onclick="funct_draw_card('split2')">Draw for second split</button></span>
+
+                    <button style="margin-top: 1em;" onclick="funct_stay()">Stay</button> 
 
                     <button id="split_button" onclick="funct_split()">Split</button> 
                 
