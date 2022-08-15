@@ -21,6 +21,9 @@ let deck_end = false;
 let test_case_a = false;
 let test_case_b = false;
 
+let test_case_c = false;
+let test_case_d = false;
+
 let ace_count = 0;
 let ace = false;
 let ace2 = false;
@@ -39,7 +42,8 @@ let dealer_text_box_card_name = 'null';
 let day = true;
 let night = false;
 
-
+let blackjack = false;
+let dealer_blackjack = false;
 function shuffle(deck)
 {
 	// for 1000 turns
@@ -219,17 +223,30 @@ function render(canvasName , dealer){
     
     
    
-    if(test_case_a == true){
+  
+    if(test_case_a && !dealer){
 
-    cardName = 1;
+        cardName = 1;
+        
+        }
+    
+        else if(test_case_b && !dealer){
+    
+            cardName = 10;
+    
+        }
+    
+        if(test_case_c && dealer){
 
-    }
-
-    else if(test_case_b == true){
-
-        cardName = 10;
-
-    }
+            cardName = 1;
+            
+            }
+        
+            else if(test_case_d && dealer){
+        
+                cardName = 10;
+        
+            }
 
     document.getElementById(canvasName).innerHTML = cardName;
     
@@ -532,7 +549,8 @@ dealer_card_sum = 0;
 dealer_ace_count = 0;
 dealer_ace = false;
 dealer_ace2 = false;
-
+blackjack = false;
+dealer_blackjack = false;
 }
 
 function render_bet(amount){
@@ -543,6 +561,21 @@ function render_bet(amount){
     document.getElementById("entered_bet").innerHTML = bet_amount;
 
     }
+
+    else if([Number(bet_amount) + Number(amount)] > balance){
+
+        bet_amount = balance;
+        document.getElementById("entered_bet").innerHTML = bet_amount;
+    
+        }
+    
+        
+    else if([Number(bet_amount) + Number(amount)] < 0){
+
+        bet_amount = 0;
+        document.getElementById("entered_bet").innerHTML = bet_amount;
+    
+        }
 
 }
 
@@ -565,7 +598,11 @@ function funct_second_card(){
     deal_audio.play();
     document.getElementById('second_card').style.display ='none';
     if(card_sum == 21){
+        blackjack = true;
         text_box.innerHTML = `You've placed $${bet_amount} <div>Your hand is ${card_sum}</div><div style='background-color : black;color:white; font-weight: bold;'>  BLACKJACK! </div>`;
+        if( dealer_card_sum < 10 ){
+            end_round()
+        }
     } 
     else{
     text_box.innerText = `You've placed $${bet_amount} \n Your hand is ${card_sum}`;
@@ -583,8 +620,13 @@ function funct_stay(){
     
     dealers2();
     
+    if(dealer_card_sum == 21){
 
-    if(dealer_card_sum < 17){
+        dealer_blackjack = true;
+
+    }
+
+    if(dealer_card_sum < 17 && !blackjack){
 
         dealer_draw_card();
     }
@@ -598,9 +640,16 @@ function funct_stay(){
 }
 
 function dealers2(){
+    
 deal_audio.play();
 document.getElementById('dealer_card_2').id = 'dealer_front2';
 render('canvasdealer2',true);
+
+    if(blackjack){
+        if(dealer_card_sum != 21){
+            end_round();
+        }
+    }
 }
 
 
@@ -613,7 +662,7 @@ const dealer_draw_card = async () => {
     while ( dealer_card_sum < 17 ) {
     await new Promise(r => setTimeout(r, 1000));
     funct_draw_card(true);
-    text_box.innerHTML = `You've placed $${bet_amount} <div>Your hand is ${card_sum}</div><div>Dealers hand is ${dealer_card_sum}</div>`;
+    text_box.innerHTML = `You've placed $${bet_amount} <div>Your hand is ${card_sum}</div><div>Dealer's hand is ${dealer_card_sum}</div>`;
   }
   end_round();
   
@@ -623,27 +672,44 @@ const dealer_draw_card = async () => {
   
 function end_round(){
 
-    if(dealer_card_sum < card_sum || dealer_card_sum > 21){
-        text_box.innerHTML = `Your hand is ${card_sum}</div> <div>Dealers hand is ${dealer_card_sum}</div><div style='background-color : green; color:white; font-weight: bold;'>YOU WIN!</div>`;
-        coins_audio.play();
+    if((!blackjack && !dealer_blackjack) || ( dealer_blackjack && blackjack )){
 
-        balance = Number(balance) + Number(bet_amount * 2);
-        document.getElementById('balance').innerHTML = 'Balance $'+balance;
-        document.getElementById('reset').style.display = 'inline';
+        if(dealer_card_sum < card_sum || dealer_card_sum > 21){
+            text_box.innerHTML = `Your hand is ${card_sum}</div> <div>Dealer's hand is ${dealer_card_sum}</div><div style='background-color : green; color:white; font-weight: bold;'>YOU WIN!</div>`;
+            coins_audio.play();
+
+            balance = Number(balance) + Number(bet_amount * 2);
+            document.getElementById('balance').innerHTML = 'Balance $'+balance;
+            document.getElementById('reset').style.display = 'inline';
+        }
+        else if(dealer_card_sum > card_sum && dealer_card_sum < 22){
+            text_box.innerHTML = `Your hand is ${card_sum}</div> <div>Dealer's hand is ${dealer_card_sum}</div><div style='background-color : red;color:white; font-weight: bold;'>YOU LOST!</div>`;
+            document.getElementById('reset').style.display = 'inline';
+            meh_audio.play();
+        }
+        else if(dealer_card_sum == card_sum){
+            text_box.innerHTML = `Your hand is ${card_sum}</div> <div>Dealer's hand is ${dealer_card_sum}</div><div style='background-color : black;color:white; font-weight: bold;'>DRAW!</div>`;
+            balance = Number(balance) + Number(bet_amount);
+            document.getElementById('balance').innerHTML = 'Balance $'+balance;
+            document.getElementById('reset').style.display = 'inline';
+        }
     }
-    else if(dealer_card_sum > card_sum && dealer_card_sum < 22){
-        text_box.innerHTML = `Your hand is ${card_sum}</div> <div>Dealers hand is ${dealer_card_sum}</div><div style='background-color : red;color:white; font-weight: bold;'>YOU LOST!</div>`;
-        document.getElementById('reset').style.display = 'inline';
-        meh_audio.play();
-    }
-    else if(dealer_card_sum == card_sum){
-        text_box.innerHTML = `Your hand is ${card_sum}</div> <div>Dealers hand is ${dealer_card_sum}</div><div style='background-color : black;color:white; font-weight: bold;'>DRAW!</div>`;
-        balance = Number(balance) + Number(bet_amount);
-        document.getElementById('reset').style.display = 'inline';
+    else if(!dealer_blackjack){
+
+        funct_blackjack();
+
+        }
+        else if(!blackjack){
+
+            funct_dealer_blackjack();
+    
+            }
+           
+    
+
     }
 
 
-}
 
 
 
@@ -787,6 +853,16 @@ function change_cheat(event) {
     else if (cheats.value == 'render') {
         render_all();
       }
+      else if (cheats.value == 'draw13') {
+        draw_spesific(13);
+    }
+    else if (cheats.value == 'draw11') {
+        draw_spesific(11);
+    } else if (cheats.value == 'draw12') {
+        draw_spesific(12);
+    }
+    
+    
     
   }
 
@@ -809,5 +885,52 @@ function change_cheat(event) {
         
     }
 
+    
+    else if(value == 11){
+        test_case_c = true;
+        test_case_d = false;
+        
+    }
+
+        
+    else if(value == 12){
+        test_case_c = false;
+        test_case_d = true;
+        
+    }
+
+    else if(value == 13){
+        test_case_c = false;
+        test_case_d = false;
+        
+    }
+
+  }
+
+  function funct_blackjack(){
+
+    document.getElementById('draw_card').style.display = 'none';
+
+    coins_audio.play();
+    text_box.innerHTML = `<div style='background-color : black; color:white; font-weight: bold;'>You have Black Jack !</div>
+    <div style='background-color : black; color:wheat; font-weight: bold;'> You will be paid 3 to 2</div>
+     <div style='background-color : green; color:white; font-weight: bold;'>YOU WIN ${Number( bet_amount * 3/2)} </div>`;
+
+    balance = Number(balance) + Number(bet_amount * 3/2);
+    document.getElementById('balance').innerHTML = 'Balance $'+balance;
+    document.getElementById('reset').style.display = 'inline';
+
+  }
+
+ function funct_dealer_blackjack(){
+
+    meh_audio.play();
+    text_box.innerHTML = `<div style='background-color : black; color:white; font-weight: bold;'>Dealer have BlackJack !</div>
+    <div style='background-color : black; color:wheat; font-weight: bold;'>And you don't</div>
+     <div style='background-color : red; color:white; font-weight: bold;'>YOU LOST ${Number(bet_amount)} </div>`;
+
+    balance = Number(balance) - Number(bet_amount);
+    document.getElementById('balance').innerHTML = 'Balance $'+balance;
+    document.getElementById('reset').style.display = 'inline';
 
   }
