@@ -45,7 +45,7 @@ gap: 16px;
 background-color: #9a6559;
 flex-grow: 1;
 color: rgb(0, 0, 0);
-min-height: 80vh;
+min-height: 60vh;
 border-radius: 16px;
 box-shadow: 0.4vh 0.6vh rgba(0, 0, 0, 0.6);
 display: flex;
@@ -83,9 +83,13 @@ gap: 3px;
 
 a{
     text-decoration: none;
-    color:white;
+    color:rgb(44, 31, 31);
     font-weight: bold;
     font-size: 32px;
-    -webkit-text-stroke: 1px rgba(37, 33, 33, 0.919)
+   
 }
 
+.img_shadow {
+
+    filter: drop-shadow(-10px 8px 3px rgba(0, 0, 0,0.5));
+ }

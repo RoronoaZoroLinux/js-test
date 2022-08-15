@@ -737,10 +737,15 @@ function gece(){
     document.getElementById('big-header').style.backgroundColor = '#292727';
     document.getElementById('big-header').style.color = 'white';
     document.getElementById("footer").style.color = "wheat"
-    document.getElementById("cuteid").innerHTML = '<img src="../img/cutesleep.png" alt="cute dino"> <a href="../index.html"><br>NoteHub</a>';
+    document.getElementById("cuteid").innerHTML = '<img src="../img/cutesleep.png" alt="cute dino"> <a class="white_text" href="../index.html"><br>NoteHub</a>';
     document.getElementById("toggle").innerText = 'Day Mode';
     document.getElementById("toggle").style.backgroundColor = '#9a6559';
     document.getElementById("try").style.color = "wheat"
+    document.getElementById("footer_link").style.color = "white";
+    document.getElementById("cheats_link").style.color = "white";
+    
+
+    
     
 
 }
@@ -754,10 +759,12 @@ function gunduz(){
     document.getElementById('big-header').style.backgroundColor = '#e7e9dc';
     document.getElementById('big-header').style.color = '#654f12';
     document.getElementById("footer").style.color = "black"
-    document.getElementById("cuteid").innerHTML = '<img src="../img/cute.png" alt="cute dino"> <a href="../index.html"><br>NoteHub</a>';
+    document.getElementById("cuteid").innerHTML = '<img src="../img/cute.png" alt="cute dino"> <a class="black_text" href="../index.html"><br>NoteHub</a>';
     document.getElementById("toggle").innerText = 'Night Mode';
     document.getElementById("toggle").style.backgroundColor = '#343454';
     document.getElementById("try").style.color = "black"
+    document.getElementById("footer_link").style.color = "black";
+    document.getElementById("cheats_link").style.color = "black";
 }
 
 function green_theme(){
