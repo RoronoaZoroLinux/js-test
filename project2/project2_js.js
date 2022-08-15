@@ -550,7 +550,7 @@ dealer_ace_count = 0;
 dealer_ace = false;
 dealer_ace2 = false;
 blackjack = false;
-
+dealer_blackjack = false;
 }
 
 function render_bet(amount){
@@ -620,7 +620,12 @@ function funct_stay(){
     
     dealers2();
     
-    
+    if(dealer_card_sum == 21){
+
+        dealer_blackjack = true;
+
+    }
+
     if(dealer_card_sum < 17 && !blackjack){
 
         dealer_draw_card();
@@ -667,7 +672,7 @@ const dealer_draw_card = async () => {
   
 function end_round(){
 
-    if(!blackjack){
+    if((!blackjack && !dealer_blackjack) || ( dealer_blackjack && blackjack )){
 
         if(dealer_card_sum < card_sum || dealer_card_sum > 21){
             text_box.innerHTML = `Your hand is ${card_sum}</div> <div>Dealer's hand is ${dealer_card_sum}</div><div style='background-color : green; color:white; font-weight: bold;'>YOU WIN!</div>`;
@@ -685,14 +690,22 @@ function end_round(){
         else if(dealer_card_sum == card_sum){
             text_box.innerHTML = `Your hand is ${card_sum}</div> <div>Dealer's hand is ${dealer_card_sum}</div><div style='background-color : black;color:white; font-weight: bold;'>DRAW!</div>`;
             balance = Number(balance) + Number(bet_amount);
+            document.getElementById('balance').innerHTML = 'Balance $'+balance;
             document.getElementById('reset').style.display = 'inline';
         }
     }
-    else{
+    else if(!dealer_blackjack){
 
         funct_blackjack();
 
         }
+        else if(!blackjack){
+
+            funct_dealer_blackjack();
+    
+            }
+           
+    
 
     }
 
@@ -902,6 +915,19 @@ function change_cheat(event) {
      <div style='background-color : green; color:white; font-weight: bold;'>YOU WIN ${Number( bet_amount * 3/2)} </div>`;
 
     balance = Number(balance) + Number(bet_amount * 3/2);
+    document.getElementById('balance').innerHTML = 'Balance $'+balance;
+    document.getElementById('reset').style.display = 'inline';
+
+  }
+
+ function funct_dealer_blackjack(){
+
+    meh_audio.play();
+    text_box.innerHTML = `<div style='background-color : black; color:white; font-weight: bold;'>Dealer have BlackJack !</div>
+    <div style='background-color : black; color:wheat; font-weight: bold;'>And you don't</div>
+     <div style='background-color : red; color:white; font-weight: bold;'>YOU LOST ${Number(bet_amount)} </div>`;
+
+    balance = Number(balance) - Number(bet_amount);
     document.getElementById('balance').innerHTML = 'Balance $'+balance;
     document.getElementById('reset').style.display = 'inline';
 
