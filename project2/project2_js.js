@@ -909,6 +909,8 @@ function change_cheat(event) {
 
   function funct_blackjack(){
 
+    document.getElementById('draw_card').style.display = 'none';
+
     coins_audio.play();
     text_box.innerHTML = `<div style='background-color : black; color:white; font-weight: bold;'>You have Black Jack !</div>
     <div style='background-color : black; color:wheat; font-weight: bold;'> You will be paid 3 to 2</div>
