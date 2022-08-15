@@ -21,6 +21,9 @@ let deck_end = false;
 let test_case_a = false;
 let test_case_b = false;
 
+let test_case_c = false;
+let test_case_d = false;
+
 let ace_count = 0;
 let ace = false;
 let ace2 = false;
@@ -40,6 +43,7 @@ let day = true;
 let night = false;
 
 let blackjack = false;
+let dealer_blackjack = false;
 function shuffle(deck)
 {
 	// for 1000 turns
@@ -231,7 +235,18 @@ function render(canvasName , dealer){
             cardName = 10;
     
         }
+    
+        if(test_case_c && dealer){
 
+            cardName = 1;
+            
+            }
+        
+            else if(test_case_d && dealer){
+        
+                cardName = 10;
+        
+            }
 
     document.getElementById(canvasName).innerHTML = cardName;
     
@@ -606,7 +621,7 @@ function funct_stay(){
     dealers2();
     
     
-    if(dealer_card_sum < 17){
+    if(dealer_card_sum < 17 && !blackjack){
 
         dealer_draw_card();
     }
@@ -625,11 +640,11 @@ deal_audio.play();
 document.getElementById('dealer_card_2').id = 'dealer_front2';
 render('canvasdealer2',true);
 
-if(blackjack){
-    if(dealer_card_sum != 21){
-        end_round();
+    if(blackjack){
+        if(dealer_card_sum != 21){
+            end_round();
+        }
     }
-}
 }
 
 
@@ -825,6 +840,16 @@ function change_cheat(event) {
     else if (cheats.value == 'render') {
         render_all();
       }
+      else if (cheats.value == 'draw13') {
+        draw_spesific(13);
+    }
+    else if (cheats.value == 'draw11') {
+        draw_spesific(11);
+    } else if (cheats.value == 'draw12') {
+        draw_spesific(12);
+    }
+    
+    
     
   }
 
@@ -847,6 +872,25 @@ function change_cheat(event) {
         
     }
 
+    
+    else if(value == 11){
+        test_case_c = true;
+        test_case_d = false;
+        
+    }
+
+        
+    else if(value == 12){
+        test_case_c = false;
+        test_case_d = true;
+        
+    }
+
+    else if(value == 13){
+        test_case_c = false;
+        test_case_d = false;
+        
+    }
 
   }
 
