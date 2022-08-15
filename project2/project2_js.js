@@ -219,17 +219,19 @@ function render(canvasName , dealer){
     
     
    
-    if(test_case_a == true){
+  
+    if(test_case_a && !dealer){
 
-    cardName = 1;
+        cardName = 1;
+        
+        }
+    
+        else if(test_case_b && !dealer){
+    
+            cardName = 10;
+    
+        }
 
-    }
-
-    else if(test_case_b == true){
-
-        cardName = 10;
-
-    }
 
     document.getElementById(canvasName).innerHTML = cardName;
     
@@ -545,6 +547,21 @@ function render_bet(amount){
 
     }
 
+    else if([Number(bet_amount) + Number(amount)] > balance){
+
+        bet_amount = balance;
+        document.getElementById("entered_bet").innerHTML = bet_amount;
+    
+        }
+    
+        
+    else if([Number(bet_amount) + Number(amount)] < 0){
+
+        bet_amount = 0;
+        document.getElementById("entered_bet").innerHTML = bet_amount;
+    
+        }
+
 }
 
 function funct_enter_bet(){
@@ -836,9 +853,12 @@ function change_cheat(event) {
   function funct_blackjack(){
 
     coins_audio.play();
-    text_box.innerHTML = `<div style='background-color : black; color:white; font-weight: bold;'>You have Black Jack !</div> <div  style='background-color : black; color:wheat; font-weight: bold;> You will be paid 3 to 2</div><div style='background-color : green; color:white; font-weight: bold;'>YOU WIN ${Number( bet_amount * 3/2)} </div>`;
+    text_box.innerHTML = `<div style='background-color : black; color:white; font-weight: bold;'>You have Black Jack !</div>
+    <div style='background-color : black; color:wheat; font-weight: bold;'> You will be paid 3 to 2</div>
+     <div style='background-color : green; color:white; font-weight: bold;'>YOU WIN ${Number( bet_amount * 3/2)} </div>`;
 
     balance = Number(balance) + Number(bet_amount * 3/2);
     document.getElementById('balance').innerHTML = 'Balance $'+balance;
     document.getElementById('reset').style.display = 'inline';
+
   }
