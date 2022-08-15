@@ -44,6 +44,11 @@ let night = false;
 
 let blackjack = false;
 let dealer_blackjack = false;
+
+let card_id1 = 'none';
+let card_id2 = 'none';
+
+let able_to_split = false;
 function shuffle(deck)
 {
 	// for 1000 turns
@@ -82,7 +87,7 @@ function drawCard(){
 function render(canvasName , dealer){
     
     let newCard =  drawCard();
-   
+
     let cardName;
    
     let symbolName1 = 'symbol1'+canvasName;
@@ -334,6 +339,27 @@ function render(canvasName , dealer){
             
 
 
+            
+    if( (card_id1 == 'none' || card_id2 == 'none') && !dealer ){
+        
+        if(card_id1 != 'none'){
+
+            card_id2 = cardName;
+            able_to_split = true;
+            document.getElementById("split_button").style.display = 'inline';
+        }
+
+        if(card_id1 == 'none'){
+
+            card_id1 = cardName;
+
+        }
+
+
+    }
+
+
+
     }//end of deck > 1
 
     document.getElementById("deck_count").innerHTML = deck.length;
@@ -551,6 +577,9 @@ dealer_ace = false;
 dealer_ace2 = false;
 blackjack = false;
 dealer_blackjack = false;
+card_id1 = 'none';
+card_id2 = 'none';
+able_to_split = false;
 }
 
 function render_bet(amount){
@@ -932,5 +961,11 @@ function change_cheat(event) {
     balance = Number(balance) - Number(bet_amount);
     document.getElementById('balance').innerHTML = 'Balance $'+balance;
     document.getElementById('reset').style.display = 'inline';
+
+  }
+
+  function funct_split(){
+
+    alert("split");
 
   }
