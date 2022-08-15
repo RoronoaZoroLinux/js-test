@@ -39,7 +39,7 @@ let dealer_text_box_card_name = 'null';
 let day = true;
 let night = false;
 
-
+let blackjack = false;
 function shuffle(deck)
 {
 	// for 1000 turns
@@ -532,6 +532,7 @@ dealer_card_sum = 0;
 dealer_ace_count = 0;
 dealer_ace = false;
 dealer_ace2 = false;
+blackjack = false;
 
 }
 
@@ -565,7 +566,11 @@ function funct_second_card(){
     deal_audio.play();
     document.getElementById('second_card').style.display ='none';
     if(card_sum == 21){
+        blackjack = true;
         text_box.innerHTML = `You've placed $${bet_amount} <div>Your hand is ${card_sum}</div><div style='background-color : black;color:white; font-weight: bold;'>  BLACKJACK! </div>`;
+        if( dealer_card_sum < 10 ){
+            end_round()
+        }
     } 
     else{
     text_box.innerText = `You've placed $${bet_amount} \n Your hand is ${card_sum}`;
@@ -583,7 +588,7 @@ function funct_stay(){
     
     dealers2();
     
-
+    
     if(dealer_card_sum < 17){
 
         dealer_draw_card();
@@ -598,9 +603,16 @@ function funct_stay(){
 }
 
 function dealers2(){
+    
 deal_audio.play();
 document.getElementById('dealer_card_2').id = 'dealer_front2';
 render('canvasdealer2',true);
+
+if(blackjack){
+    if(dealer_card_sum != 21){
+        end_round();
+    }
+}
 }
 
 
@@ -613,7 +625,7 @@ const dealer_draw_card = async () => {
     while ( dealer_card_sum < 17 ) {
     await new Promise(r => setTimeout(r, 1000));
     funct_draw_card(true);
-    text_box.innerHTML = `You've placed $${bet_amount} <div>Your hand is ${card_sum}</div><div>Dealers hand is ${dealer_card_sum}</div>`;
+    text_box.innerHTML = `You've placed $${bet_amount} <div>Your hand is ${card_sum}</div><div>Dealer's hand is ${dealer_card_sum}</div>`;
   }
   end_round();
   
@@ -623,27 +635,36 @@ const dealer_draw_card = async () => {
   
 function end_round(){
 
-    if(dealer_card_sum < card_sum || dealer_card_sum > 21){
-        text_box.innerHTML = `Your hand is ${card_sum}</div> <div>Dealers hand is ${dealer_card_sum}</div><div style='background-color : green; color:white; font-weight: bold;'>YOU WIN!</div>`;
-        coins_audio.play();
+    if(!blackjack){
 
-        balance = Number(balance) + Number(bet_amount * 2);
-        document.getElementById('balance').innerHTML = 'Balance $'+balance;
-        document.getElementById('reset').style.display = 'inline';
+        if(dealer_card_sum < card_sum || dealer_card_sum > 21){
+            text_box.innerHTML = `Your hand is ${card_sum}</div> <div>Dealer's hand is ${dealer_card_sum}</div><div style='background-color : green; color:white; font-weight: bold;'>YOU WIN!</div>`;
+            coins_audio.play();
+
+            balance = Number(balance) + Number(bet_amount * 2);
+            document.getElementById('balance').innerHTML = 'Balance $'+balance;
+            document.getElementById('reset').style.display = 'inline';
+        }
+        else if(dealer_card_sum > card_sum && dealer_card_sum < 22){
+            text_box.innerHTML = `Your hand is ${card_sum}</div> <div>Dealer's hand is ${dealer_card_sum}</div><div style='background-color : red;color:white; font-weight: bold;'>YOU LOST!</div>`;
+            document.getElementById('reset').style.display = 'inline';
+            meh_audio.play();
+        }
+        else if(dealer_card_sum == card_sum){
+            text_box.innerHTML = `Your hand is ${card_sum}</div> <div>Dealer's hand is ${dealer_card_sum}</div><div style='background-color : black;color:white; font-weight: bold;'>DRAW!</div>`;
+            balance = Number(balance) + Number(bet_amount);
+            document.getElementById('reset').style.display = 'inline';
+        }
     }
-    else if(dealer_card_sum > card_sum && dealer_card_sum < 22){
-        text_box.innerHTML = `Your hand is ${card_sum}</div> <div>Dealers hand is ${dealer_card_sum}</div><div style='background-color : red;color:white; font-weight: bold;'>YOU LOST!</div>`;
-        document.getElementById('reset').style.display = 'inline';
-        meh_audio.play();
-    }
-    else if(dealer_card_sum == card_sum){
-        text_box.innerHTML = `Your hand is ${card_sum}</div> <div>Dealers hand is ${dealer_card_sum}</div><div style='background-color : black;color:white; font-weight: bold;'>DRAW!</div>`;
-        balance = Number(balance) + Number(bet_amount);
-        document.getElementById('reset').style.display = 'inline';
+    else{
+
+        funct_blackjack();
+
+        }
+
     }
 
 
-}
 
 
 
@@ -810,4 +831,14 @@ function change_cheat(event) {
     }
 
 
+  }
+
+  function funct_blackjack(){
+
+    coins_audio.play();
+    text_box.innerHTML = `<div style='background-color : black; color:white; font-weight: bold;'>You have Black Jack !</div> <div  style='background-color : black; color:wheat; font-weight: bold;> You will be paid 3 to 2</div><div style='background-color : green; color:white; font-weight: bold;'>YOU WIN ${Number( bet_amount * 3/2)} </div>`;
+
+    balance = Number(balance) + Number(bet_amount * 3/2);
+    document.getElementById('balance').innerHTML = 'Balance $'+balance;
+    document.getElementById('reset').style.display = 'inline';
   }
