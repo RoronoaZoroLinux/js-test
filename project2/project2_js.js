@@ -592,7 +592,8 @@ function funct_enter_bet(){
 
 
 function funct_second_card(){
-
+	
+    document.getElementById('draw_card').style.display = 'inline';
     document.getElementById('card2').id = 'front2';
     render('canvas2',false);
     deal_audio.play();
@@ -607,7 +608,7 @@ function funct_second_card(){
     else{
     text_box.innerText = `You've placed $${bet_amount} \n Your hand is ${card_sum}`;
     }
-    document.getElementById('draw_card').style.display = 'inline';
+   
 
 }
 
