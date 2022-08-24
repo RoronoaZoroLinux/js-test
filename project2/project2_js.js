@@ -933,7 +933,7 @@ function change_cheat(event) {
  function funct_dealer_blackjack(){
 
     meh_audio.play();
-    text_box.innerHTML = `<div style='background-color : black; color:white; font-weight: bold;'>Dealer have BlackJack !</div>
+    text_box.innerHTML = `<div style='background-color : black; color:white; font-weight: bold;'>Dealer has BlackJack !</div>
     <div style='background-color : black; color:wheat; font-weight: bold;'>And you don't</div>
      <div style='background-color : red; color:white; font-weight: bold;'>YOU LOST ${Number(bet_amount)} </div>`;
 
