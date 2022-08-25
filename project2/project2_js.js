@@ -716,6 +716,7 @@ function end_round(){
 
 
 function day_night_toggle(){
+switch_audio.currentTime = 0;
 switch_audio.play();
 if(day){
 gece();
