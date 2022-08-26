@@ -11,6 +11,7 @@
     
     height: 550px;
     width: 100px;
+  
    
     
    }
@@ -31,7 +32,18 @@
     display: flex;
 
    }
-   
+   p{
+    display: flex;
+    align-items: flex-end;
+    text-align: center;
+    justify-content: center;
+    font-size: 32px;
+    user-select: none;
+
+   }
+   kbd{
+    margin-bottom: 50px;
+   }
 
 
     </style>
@@ -40,16 +52,24 @@
   <body>
 
     <span class="keyboard">
-    <p data-key="1" class="img_key"></p>
-    <p data-key="2"class="img_key"></p>
+    <p data-key="1" class="img_key"><kbd>do</kbd></p>
+    <p data-key="2"class="img_key"><kbd>re</kbd</p>
     <p data-key="3" class="img_key"></p>
     <p data-key="4" class="img_key"></p>
     <p data-key="5" class="img_key"></p>
     <p data-key="6" class="img_key"></p>
     <p data-key="7" class="img_key"></p>
+    <p data-key="8" class="img_key"></p>
+    <p data-key="9" class="img_key"></p>
+    <p data-key="10" class="img_key"></p>
     <p data-key="0" class="img_key_black"></p>
     <p data-key="1" class="img_key_black"></p>
-    <p data-key="2" class="img_key_black"></p>
+    <p data-key="3" class="img_key_black"></p>
+    <p data-key="4" class="img_key_black"></p>
+    <p data-key="5" class="img_key_black"></p>
+    <p data-key="7" class="img_key_black"></p>
+    <p data-key="8" class="img_key_black"></p>
+   
     
 
     </span>
@@ -97,10 +117,10 @@
       await new Promise(r => setTimeout(r, 60));
       
       if(black){
-        e.target.style = `background: url(sprites.png) ${ -1000 - i*100}px;`
+        e.target.style.background = `url(sprites.png) ${ -1000 - i*100}px`
       }
       else{
-      e.target.style = `background: url(sprites.png) ${ i*-100}px;`
+      e.target.style.background = `url(sprites.png) ${ i*-100}px`
       }
     }
     
@@ -109,10 +129,10 @@
       await new Promise(r => setTimeout(r, 60));
 
       if(black){
-        e.target.style = `background: url(sprites.png) ${ -2000 + i*100}px;`
+        e.target.style.background = `url(sprites.png) ${ -2000 + i*100}px`
       }
       else{
-        e.target.style = `background: url(sprites.png) ${(-1000)+(i*100)}px;`
+        e.target.style.background = `url(sprites.png) ${(-1000)+(i*100)}px`
       }
       
       
