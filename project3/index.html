@@ -31,6 +31,8 @@
    .keyboard{
     display: flex;
 
+   
+
    }
    p{
     display: flex;
@@ -41,7 +43,10 @@
     user-select: none;
 
    }
-   kbd{
+   .note{
+    display: none;
+    font-weight: bold;
+    opacity: 0.7;
     margin-bottom: 50px;
    }
 
@@ -52,33 +57,43 @@
   <body>
 
     <span class="keyboard">
-    <p data-key="1" class="img_key"><kbd>do</kbd></p>
-    <p data-key="2"class="img_key"><kbd>re</kbd</p>
-    <p data-key="3" class="img_key"></p>
-    <p data-key="4" class="img_key"></p>
-    <p data-key="5" class="img_key"></p>
-    <p data-key="6" class="img_key"></p>
-    <p data-key="7" class="img_key"></p>
-    <p data-key="8" class="img_key"></p>
-    <p data-key="9" class="img_key"></p>
-    <p data-key="10" class="img_key"></p>
-    <p data-key="0" class="img_key_black"></p>
-    <p data-key="1" class="img_key_black"></p>
-    <p data-key="3" class="img_key_black"></p>
-    <p data-key="4" class="img_key_black"></p>
-    <p data-key="5" class="img_key_black"></p>
-    <p data-key="7" class="img_key_black"></p>
-    <p data-key="8" class="img_key_black"></p>
-   
-    
+    <p data-key="1" class="img_key"> <span class="note">do</span> </p>
+    <p data-key="2"class="img_key"> <span class="note">re</span> </p>
+    <p data-key="3" class="img_key"><span class="note">mi</span></p>
+    <p data-key="4" class="img_key"><span class="note">fa</span></p>
+    <p data-key="5" class="img_key"><span class="note">sol</span></p>
+    <p data-key="6" class="img_key"><span class="note">la</span></p>
+    <p data-key="7" class="img_key"><span class="note">si</span></p>
+    <p data-key="8" class="img_key"><span class="note">do</span></p>
+    <p data-key="9" class="img_key"><span class="note">re</span></p>
+    <p data-key="10" class="img_key"><span class="note">mi</span></p>
+    <p data-key="11" data-pos="0" class="img_key_black"></p>
+    <p data-key="12" data-pos="1" class="img_key_black"></p>
+    <p data-key="13" data-pos="3" class="img_key_black"></p>
+    <p data-key="14" data-pos="4" class="img_key_black"></p>
+    <p data-key="15" data-pos="5" class="img_key_black"></p>
+    <p data-key="16" data-pos="7" class="img_key_black"></p>
+    <p data-key="17" data-pos="8" class="img_key_black"></p>
+  
 
     </span>
+    <button onclick="showNotes()">show notes</button>
+
 
 </body>
 
 <script>
 
- 
+    const sounds =[];
+
+    for (let i = 0 ; i < 17 ; i++){
+
+      sounds[i] = new Audio(`notes/${i+1}.mp3`);
+      
+    }
+
+
+    
 
     let key = document.querySelectorAll('.img_key');
     let key2 = document.querySelectorAll('.img_key_black');
@@ -90,21 +105,24 @@
     
 
     all_keys.forEach(key => {
-      key.addEventListener("click" , key => playAnim(key))
+      key.addEventListener("mousedown" , key => playAnim(key))
     });
 
     array_black_keys.forEach(key => 
     {
-      let datakey = key.dataset.key
+      let datakey = key.dataset.pos;
       key.style.left = (datakey*100 + 50) + "px";
     
     });
 
 
   const playAnim = async (e) => {
+    
+    let black =false;
 
-    let black = false
-    let finished = false;
+    sounds[(e.target.dataset.key)-1].currentTime = 0;
+    sounds[(e.target.dataset.key)-1].play();
+
 
     if(e.target.className == "img_key_black"){   
       black =true;
@@ -114,7 +132,7 @@
     for ( let i = 1 ; i < 10 ; i++) {
 
 
-      await new Promise(r => setTimeout(r, 60));
+      await new Promise(r => setTimeout(r, 10));
       
       if(black){
         e.target.style.background = `url(sprites.png) ${ -1000 - i*100}px`
@@ -126,7 +144,7 @@
     
     for ( let i = 1 ; i < 11 ; i++) {
 
-      await new Promise(r => setTimeout(r, 60));
+      await new Promise(r => setTimeout(r, 10));
 
       if(black){
         e.target.style.background = `url(sprites.png) ${ -2000 + i*100}px`
@@ -138,12 +156,13 @@
       
     }
 
-    finished = true;
-    
+
 }
 
 
-
-
+function showNotes(){
+  
+   Array.from(document.querySelectorAll(".note")).forEach( element => { if(element.style.display ==='inline'){element.style.display ='none'}else{element.style.display ='inline'} })
+}
 </script>
 </html>
