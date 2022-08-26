@@ -13,12 +13,14 @@
       transform-origin: top left;
       display: flex;
       flex-direction: column;
+   
     
     }
 
     button{
       font-size: 3em;
       max-width: 20em;
+      border-radius: 2em;
 
     }
    .img_key{
@@ -63,10 +65,11 @@
 
    }
    .note{
-    display: none;
+    
     font-weight: bold;
     opacity: 0.7;
     margin-bottom: 50px;
+    display: inline;
    }
 
 
@@ -119,14 +122,14 @@
   
 
     </span>
-    <button onclick="showNotes()">show keys</button>
+    <button onclick="showNotes()">toggle keys (s)</button>
 
-      
+    <div style="font-size: 1.5em;">This project is created by <a href="https://github.com/RoronoaZoroLinux">RoronoaZoroLinux</a> in 26/08/2022</div>
 </body>
 
 <script>
 
-  alert(`This project is created by RoronoaZoroLinux in 26/08/2022 for studying some certain concepts, because of that; none of the bugs you will encounter will be fixed (for future reference). All graphics are created by myself in a 3d modelling program.`)
+  //alert(`This project is created by RoronoaZoroLinux in 26/08/2022 for studying some certain concepts, because of that; none of the bugs you will encounter will be fixed (for future reference). All graphics are created by myself in a 3d modelling program.`)
 
     const sounds =[];
 
@@ -136,7 +139,7 @@
       
     }
 
-
+    showNotes()
     
 
     let key = document.querySelectorAll('.img_key');
@@ -243,8 +246,10 @@
 
 
 function showNotes(){
-  
-   Array.from(document.querySelectorAll(".note")).forEach( element => { if(element.style.display ==='inline'){element.style.display ='none'}else{element.style.display ='inline'} })
+  const array =  Array.from(document.querySelectorAll(".note")).forEach( element => { element.style.display == 'inline' ? element.style.display = 'none' : element.style.display ='inline'});
+ 
+
+
 }
 
 const enumKeys = {
@@ -272,6 +277,9 @@ p: 10, P:10,
 
 window.addEventListener("keydown", e=> {
   
+  if(e.key =="s" || e.key == "S"){
+    showNotes();
+  }
   if(!enumKeys[e.key]) return;
 
    let val = document.querySelector(`[data-key="${enumKeys[e.key]}"]`);
