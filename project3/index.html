@@ -57,16 +57,16 @@
   <body>
 
     <span class="keyboard">
-    <p data-key="1"  class="img_key"> <span class="note">do</span> </p>
-    <p data-key="2"  class="img_key"> <span class="note">re</span> </p>
-    <p data-key="3"  class="img_key"><span class="note">mi</span></p>
-    <p data-key="4"  class="img_key"><span class="note">fa</span></p>
-    <p data-key="5"  class="img_key"><span class="note">sol</span></p>
-    <p data-key="6"  class="img_key"><span class="note">la</span></p>
-    <p data-key="7"  class="img_key"><span class="note">si</span></p>
-    <p data-key="8"  class="img_key"><span class="note">do</span></p>
-    <p data-key="9"  class="img_key"><span class="note">re</span></p>
-    <p data-key="10" class="img_key"><span class="note">mi</span></p>
+    <p data-key="1"  class="img_key"> <span class="note">Q</span> </p>
+    <p data-key="2"  class="img_key"> <span class="note">W</span> </p>
+    <p data-key="3"  class="img_key"><span class="note">E</span></p>
+    <p data-key="4"  class="img_key"><span class="note">R</span></p>
+    <p data-key="5"  class="img_key"><span class="note">T</span></p>
+    <p data-key="6"  class="img_key"><span class="note">Y</span></p>
+    <p data-key="7"  class="img_key"><span class="note">U</span></p>
+    <p data-key="8"  class="img_key"><span class="note">I</span></p>
+    <p data-key="9"  class="img_key"><span class="note">O</span></p>
+    <p data-key="10" class="img_key"><span class="note">P</span></p>
     <p data-key="11" data-pos="0" class="img_key_black"></p>
     <p data-key="12" data-pos="1" class="img_key_black"></p>
     <p data-key="13" data-pos="3" class="img_key_black"></p>
@@ -116,16 +116,45 @@
     });
 
 
-  const playAnim = async (e) => {
-  
+  const playAnim = async (e , enumarator = 'null' , val = 'null') => {
     
+    let data_set_key;
+    let target_classname;
+    let target_style_background;
+   
     let black =false;
+   
+    if(e.constructor.name == "KeyboardEvent") {
+      
+      console.log(enumarator);
+      
+      data_set_key =enumarator;
+  
+      if(enumarator > 10) black = true;
+      
+      target_style = val.style;
+      
+      
+    }
 
-    sounds[(e.target.dataset.key)-1].currentTime = 0;
-    sounds[(e.target.dataset.key)-1].play();
+    else if(e.constructor.name == "MouseEvent") {
+
+      data_set_key = e.target.dataset.key;
+      target_classname = e.target.className;
+      target_style = e.target.style;
+
+    }
+
+    else return;
+    
+    
+    
+
+    sounds[(data_set_key)-1].currentTime = 0;
+    sounds[(data_set_key)-1].play();
 
 
-    if(e.target.className == "img_key_black"){   
+    if(target_classname == "img_key_black"){   
       black =true;
     }
   
@@ -136,10 +165,10 @@
       await new Promise(r => setTimeout(r, 10));
       
       if(black){
-        e.target.style.background = `url(sprites.png) ${ -1000 - i*100}px`
+        target_style.background = `url(sprites.png) ${ -1000 - i*100}px`
       }
       else{
-      e.target.style.background = `url(sprites.png) ${ i*-100}px`
+        target_style.background = `url(sprites.png) ${ i*-100}px`
       }
     }
     
@@ -148,10 +177,10 @@
       await new Promise(r => setTimeout(r, 10));
 
       if(black){
-        e.target.style.background = `url(sprites.png) ${ -2000 + i*100}px`
+        target_style.background = `url(sprites.png) ${ -2000 + i*100}px`
       }
       else{
-        e.target.style.background = `url(sprites.png) ${(-1000)+(i*100)}px`
+        target_style.background = `url(sprites.png) ${(-1000)+(i*100)}px`
       }
       
       
@@ -174,11 +203,17 @@ e: 3, E:3,
 r: 4, R:4,
 t: 5, T:5,
 y: 6, Y:6,
-u: 7, u:7,
+u: 7, U:7,
 ı: 8, I:8, i:8,
 o: 9, O:9,
-p: 10, P:10
-
+p: 10, P:10,
+"1": 11,
+"2": 12,
+"5": 13,
+"6": 14,
+"7": 15,
+"9": 16,
+"0": 17
 
 
 }
@@ -189,10 +224,14 @@ window.addEventListener("keydown", e=> {
 
    
    let val = document.querySelector(`[data-key="${enumKeys[e.key]}"]`);
+   
+   /*
    val.style.background = 'URL("sprites.png") -500px'
    sounds[enumKeys[e.key]].currentTime =0;
    sounds[enumKeys[e.key]].play();
+   */
 
+  playAnim(e ,enumKeys[e.key] ,val );
   })
 </script>
 </html>
