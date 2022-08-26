@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+
+    <title>piyano</title>
+
+    <style>
+   .img_key{
+    background: url(sprites.png) 0px;
+    
+    height: 550px;
+    width: 100px;
+   
+    
+   }
+
+   .img_key_black{
+    background: url(sprites.png) 1000px;
+    
+    height: 550px;
+    width: 100px;
+    position: fixed;
+    left: 50px;
+    transform-origin: top center;
+    scale: 0.6 0.7;
+    overflow: hidden;
+  
+   }
+   .keyboard{
+    display: flex;
+
+   }
+   
+
+
+    </style>
+  </head>
+
+  <body>
+
+    <span class="keyboard">
+    <p data-key="1" class="img_key"></p>
+    <p data-key="2"class="img_key"></p>
+    <p data-key="3" class="img_key"></p>
+    <p data-key="4" class="img_key"></p>
+    <p data-key="5" class="img_key"></p>
+    <p data-key="6" class="img_key"></p>
+    <p data-key="7" class="img_key"></p>
+    <p data-key="0" class="img_key_black"></p>
+    <p data-key="1" class="img_key_black"></p>
+    <p data-key="2" class="img_key_black"></p>
+    
+
+    </span>
+
+</body>
+
+<script>
+
+ 
+
+    let key = document.querySelectorAll('.img_key');
+    let key2 = document.querySelectorAll('.img_key_black');
+  
+    const array_white_keys = Array.from(key);
+    const array_black_keys = Array.from(key2)
+    const all_keys = array_white_keys.concat(array_black_keys); 
+
+    
+
+    all_keys.forEach(key => {
+      key.addEventListener("click" , key => playAnim(key))
+    });
+
+    array_black_keys.forEach(key => 
+    {
+      let datakey = key.dataset.key
+      key.style.left = (datakey*100 + 50) + "px";
+    
+    });
+
+
+  const playAnim = async (e) => {
+
+    let black = false
+    let finished = false;
+
+    if(e.target.className == "img_key_black"){   
+      black =true;
+    }
+  
+
+    for ( let i = 1 ; i < 10 ; i++) {
+
+
+      await new Promise(r => setTimeout(r, 60));
+      
+      if(black){
+        e.target.style = `background: url(sprites.png) ${ -1000 - i*100}px;`
+      }
+      else{
+      e.target.style = `background: url(sprites.png) ${ i*-100}px;`
+      }
+    }
+    
+    for ( let i = 1 ; i < 11 ; i++) {
+
+      await new Promise(r => setTimeout(r, 60));
+
+      if(black){
+        e.target.style = `background: url(sprites.png) ${ -2000 + i*100}px;`
+      }
+      else{
+        e.target.style = `background: url(sprites.png) ${(-1000)+(i*100)}px;`
+      }
+      
+      
+    }
+
+    finished = true;
+    
+}
+
+
+
+
+</script>
+</html>
