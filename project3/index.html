@@ -6,12 +6,29 @@
     <title>piyano</title>
 
     <style>
+
+
+    body{
+      height: 80vh;
+      transform-origin: top left;
+      display: flex;
+      flex-direction: column;
+    
+    }
+
+    button{
+      font-size: 3em;
+      max-width: 20em;
+
+    }
    .img_key{
     background: url(sprites.png) 0px;
     
     height: 550px;
     width: 100px;
-  
+    top:2em;
+    position: fixed;
+    transform-origin: top center;
    
     
    }
@@ -23,12 +40,14 @@
     width: 100px;
     position: fixed;
     left: 50px;
+    top:2em;
     transform-origin: top center;
     scale: 0.6 0.7;
     overflow: hidden;
   
    }
    .keyboard{
+    
     display: flex;
 
    
@@ -51,6 +70,29 @@
    }
 
 
+
+@media(max-width: 1921px) {
+  body {
+    transform: scale(0.8);
+  }
+}
+
+@media(max-width: 1369px) {
+  body {
+    transform: scale(0.6);
+  }
+}
+
+@media(max-width: 800px) {
+  body {
+    transform: scale(0.5);
+  }
+}
+
+.black{
+  color:white;
+}
+
     </style>
   </head>
 
@@ -67,22 +109,24 @@
     <p data-key="8"  class="img_key"><span class="note">I</span></p>
     <p data-key="9"  class="img_key"><span class="note">O</span></p>
     <p data-key="10" class="img_key"><span class="note">P</span></p>
-    <p data-key="11" data-pos="0" class="img_key_black"></p>
-    <p data-key="12" data-pos="1" class="img_key_black"></p>
-    <p data-key="13" data-pos="3" class="img_key_black"></p>
-    <p data-key="14" data-pos="4" class="img_key_black"></p>
-    <p data-key="15" data-pos="5" class="img_key_black"></p>
-    <p data-key="16" data-pos="7" class="img_key_black"></p>
-    <p data-key="17" data-pos="8" class="img_key_black"></p>
+    <p data-key="11" data-pos="0" class="img_key_black"><span class="note black">1</span></p>
+    <p data-key="12" data-pos="1" class="img_key_black"><span class="note black">2</span></p>
+    <p data-key="13" data-pos="3" class="img_key_black"><span class="note black">4</span></p>
+    <p data-key="14" data-pos="4" class="img_key_black"><span class="note black">5</span></p>
+    <p data-key="15" data-pos="5" class="img_key_black"><span class="note black">6</span></p>
+    <p data-key="16" data-pos="7" class="img_key_black"><span class="note black">8</span></p>
+    <p data-key="17" data-pos="8" class="img_key_black"><span class="note black">9</span></p>
   
 
     </span>
-    <button onclick="showNotes()">show notes</button>
+    <button onclick="showNotes()">show keys</button>
 
-
+      
 </body>
 
 <script>
+
+  alert(`This project is created by RoronoaZoroLinux in 26/08/2022 for studying some certain concepts, because of that; none of the bugs you will encounter will be fixed (for future reference). All graphics are created by myself in a 3d modelling program.`)
 
     const sounds =[];
 
@@ -111,7 +155,15 @@
     array_black_keys.forEach(key => 
     {
       let datakey = key.dataset.pos;
+      console.log(key.dataset.pos);
       key.style.left = (datakey*100 + 50) + "px";
+    
+    });
+
+    array_white_keys.forEach(key => 
+    {
+      let datakey = key.dataset.key;
+      key.style.left = ((datakey-1)*100) + "px";
     
     });
 
@@ -222,16 +274,13 @@ window.addEventListener("keydown", e=> {
   
   if(!enumKeys[e.key]) return;
 
-   
    let val = document.querySelector(`[data-key="${enumKeys[e.key]}"]`);
-   
-   /*
-   val.style.background = 'URL("sprites.png") -500px'
-   sounds[enumKeys[e.key]].currentTime =0;
-   sounds[enumKeys[e.key]].play();
-   */
-
+  
   playAnim(e ,enumKeys[e.key] ,val );
+
   })
+  
+
+
 </script>
 </html>
