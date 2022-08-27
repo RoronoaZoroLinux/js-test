@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="utf-8">
-
+    <meta name="viewport" content="width=950px">
     <title>piyano</title>
 
     <style>
@@ -44,7 +44,11 @@
     left: 50px;
     top:2em;
     transform-origin: top center;
-    scale: 0.6 0.7;
+
+    -webkit-transform: scale(0.6, 0.7);
+    -moz-transform: scale(0.6 ,0.7);
+    -o-transform: scale(0.6, 0.7);
+    transform: scale(0.6 , 0.7);
     overflow: hidden;
   
    }
@@ -76,21 +80,31 @@
 
 @media(max-width: 1921px) {
   body {
+       -webkit-transform: scale(0.8);
+    -moz-transform: scale(0.8);
+    -o-transform: scale(0.8);
     transform: scale(0.8);
   }
 }
 
 @media(max-width: 1369px) {
   body {
+    -webkit-transform: scale(0.6);
+    -moz-transform: scale(0.6);
+    -o-transform: scale(0.6);
     transform: scale(0.6);
   }
 }
 
 @media(max-width: 800px) {
   body {
+    -webkit-transform: scale(0.5);
+    -moz-transform: scale(0.5);
+    -o-transform: scale(0.5);
     transform: scale(0.5);
   }
 }
+
 
 .black{
   color:white;
@@ -129,7 +143,7 @@
 
 <script>
 
-  //alert(`This project is created by RoronoaZoroLinux in 26/08/2022 for studying some certain concepts, because of that; none of the bugs you will encounter will be fixed (for future reference). All graphics are created by myself in a 3d modelling program.`)
+  alert(`This project is created by RoronoaZoroLinux in 26/08/2022 for studying some certain concepts, because of that; none of the bugs you will encounter will be fixed (for future reference). All graphics are created by myself in a 3d modelling program.`)
 
     const sounds =[];
 
@@ -140,6 +154,8 @@
     }
 
     showNotes()
+    showNotes()
+
     
 
     let key = document.querySelectorAll('.img_key');
@@ -148,9 +164,7 @@
     const array_white_keys = Array.from(key);
     const array_black_keys = Array.from(key2)
     const all_keys = array_white_keys.concat(array_black_keys); 
-
     
-
     all_keys.forEach(key => {
       key.addEventListener("mousedown" , key => playAnim(key))
     });
