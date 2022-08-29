@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=950px">
+    <meta name="viewport" content="width=950px , user-scalable=0">
     <title>piyano</title>
 
     <style>
@@ -52,6 +52,13 @@
     overflow: hidden;
   
    }
+
+   .img_key *,
+   .img_key_black *{
+    pointer-events: none;
+   }
+
+
    .keyboard{
     
     display: flex;
@@ -117,6 +124,11 @@
 .black{
   color:white;
 }
+
+*{
+  touch-action: manipulation;
+}
+
 
     </style>
   </head>
