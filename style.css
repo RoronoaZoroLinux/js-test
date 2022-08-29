@@ -93,3 +93,7 @@ a{
 
     filter: drop-shadow(-10px 8px 3px rgba(0, 0, 0,0.5));
  }
+
+ @media (max-height: 800px){
+    body{zoom: 0.6;}
+ }
