@@ -1,18 +1,22 @@
+const click = new Audio("click.wav");
+const no    = new Audio("no.wav");
+
 const screen = document.querySelector(".column2");
-const small = document.querySelector(".column1");
-const numbers = Array.from(document.querySelectorAll(".num")); 
+const small  = document.querySelector(".column1");
+const numbers   = Array.from(document.querySelectorAll(".num")); 
 const operators = Array.from(document.querySelectorAll(".op")); 
 
 let memslot1 = "";
 let memslot2 = "";
 let memslot3 = "";
-let symbol = "";
+let symbol   = "";
 let op_second = false;
 let operation = null;
 
 numbers.forEach( key =>{
 
     key.addEventListener("click" , e=>{
+        play_click();
         if(op_second === true){
 
                 memslot2 += e.target.dataset.key;
@@ -26,7 +30,8 @@ numbers.forEach( key =>{
     })
 } );
 
-const f_del = function(e){
+const f_del = function(){
+    play_click();
     if(op_second === true){
         let foo = Array.from(memslot2);
         foo.pop();
@@ -56,14 +61,17 @@ const f_del = function(e){
 const f_func = function(e){
 
 f_rmdot();
-if(op_second === true) return;
-if(memslot1 == "") memslot1 = 0;
+if(op_second === true) {
+    play_no();
+    return;
+}
 
+play_click();
+
+if(memslot1 == "") memslot1 = "0";
 memslot2 = "";
-
 operation = e.target.dataset.key;
 symbol = e.target.innerText;
-
 op_second = true;
 small.innerText = memslot1+" "+symbol;
 screen.innerText = "0";
@@ -71,7 +79,12 @@ screen.innerText = "0";
 
 const f_result = function(){
 
-if(!op_second) return;
+if(!op_second || (memslot1 == 0 && memslot2 == 0)) {
+    play_no();    
+    return;
+};
+
+play_click();
 f_undef2f();
 
 switch(operation){
@@ -86,7 +99,6 @@ switch(operation){
 
     case "DIVIDE":
         if(memslot2 == 0) memslot2 = 1;
-
         memslot3 = (parseFloat(memslot1) / parseFloat(memslot2)).toFixed(4);
         break;
 
@@ -122,15 +134,18 @@ const f_undef2f = function(){
 
 const f_pm = function(){
 
-if(screen.innerText == "0") return;
 
-if(op_second == true){
-
-memslot2 = String(-memslot2);
-screen.innerText = memslot2;
-return
+if(screen.innerText == "0"){ 
+    play_no() ;
+    return; 
 }
 
+play_click();
+if(op_second == true){
+    memslot2 = String(-memslot2);
+    screen.innerText = memslot2;
+    return;
+}
 memslot1 = String(-memslot1);
 screen.innerText = memslot1;
 };
@@ -145,7 +160,11 @@ if(op_second == true){
     memslot2 = (memslot1/100).toFixed(4);
     memslot2 = memslot2.replace(/(0*$)/, "");
     screen.innerText = memslot2;
+    play_click();
+    return;
 }
+
+play_no();
 
 };
 
@@ -155,16 +174,22 @@ if(op_second === true && !memslot2.includes(".")){
     if(memslot2 == "") memslot2=0;
     memslot2 = String(memslot2) + ".";
     screen.innerText = memslot2;
+    play_click();
 }
-if(op_second === false && !memslot1.includes(".")){
+else if(op_second === false && !memslot1.includes(".")){
     if(memslot1 == "") memslot1=0;
     memslot1 = String(memslot1) + ".";
     screen.innerText = memslot1;
+    play_click();
 }
+else{
+    play_no();
+}
+
 }
 
 const f_rmdot = function(){
-    
+
     memslot1 = memslot1.replace(/(0*$)/, "");
     memslot2 = memslot2.replace(/(0*$)/, "");
 
@@ -174,6 +199,17 @@ const f_rmdot = function(){
     if(memslot2.at(-1) == "."){
         memslot2 = memslot1.replace(/\./, "");
     }
+    if(memslot1 == "")memslot1 ="0";
+    if(memslot2 == "")memslot2 ="0";
+}
+
+const play_click = function(){
+    click.currentTime = 0;
+    click.play();
+}
+const play_no = function(){
+    no.currentTime = 0;
+    no.play();
 }
 
 document.querySelectorAll(".FUNC").forEach( key => {
